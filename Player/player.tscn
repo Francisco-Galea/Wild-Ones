@@ -42,7 +42,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ns6ky"]
 radius = 32.8063
-height = 106.627
+height = 100.428
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_loe5r"]
 animations = [{
@@ -182,16 +182,14 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(600, 600)
 script = ExtResource("1_gim6e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(184, -16)
-rotation = 0.205949
+position = Vector2(0, -3)
 shape = SubResource("CapsuleShape2D_ns6ky")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(208, -16)
+position = Vector2(25, 0)
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_loe5r")
 animation = &"Iddle"
