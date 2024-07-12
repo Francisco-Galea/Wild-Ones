@@ -15,10 +15,11 @@ public partial class Player : CharacterBody2D
 	
 	public override void _PhysicsProcess(double delta)
 	{
+		HandleMovement(delta);
 		if (_isMyTurn)
 		{
-			// Lógica de movimiento del jugador.
-			HandleMovement(delta);
+			
+			//HandleMovement(delta);
 		}
 	}
 	
