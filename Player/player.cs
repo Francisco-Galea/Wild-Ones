@@ -1,40 +1,58 @@
 using Godot;
 using System;
 
-public partial class player : CharacterBody2D
+public partial class Player : CharacterBody2D
 {
-	private String name = "Dinosaur";
-	private int hp = 100;	
-	private const float Gravity = 1000f;
-	private const int WalkSpeed = 140;
+	private bool _isMyTurn = true;
+	public const float Speed = 300.0f;
+	public const float JumpVelocity = -400.0f;
+	public float _gravity;
 	
-
+	public override void _Ready()
+	{
+		_gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+	}
+	
 	public override void _PhysicsProcess(double delta)
-    {
-        var velocity = Velocity;
+	{
+		if (_isMyTurn)
+		{
+			// Lógica de movimiento del jugador.
+			HandleMovement(delta);
+		}
+	}
+	
+	 private void HandleMovement(double delta)
+	{
+		Vector2 velocity = Velocity;
 
-        velocity.Y += (float)delta * Gravity;
+		// Apply gravity if not on floor.
+		if (!IsOnFloor())
+			velocity.Y += _gravity * (float)delta;
 
-        if (Input.IsActionPressed("Left"))
-        {
-            velocity.X = -WalkSpeed;
-        }
-        else if (Input.IsActionPressed("Right"))
-        {
-            velocity.X = WalkSpeed;
-        }
-		
-        else
-        {
-            velocity.X = 0;
-        }
+		// Handle jump.
+		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
+			velocity.Y = JumpVelocity;
 
-        Velocity = velocity;
+		// Handle horizontal movement.
+		float inputDirection = Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left");
+		velocity.X = inputDirection * Speed;
 
-        MoveAndSlide();
-    }
-
-   
-
-
+		Velocity = velocity;
+		MoveAndSlide();
+	}
+	
+	public void SetTurn(bool isMyTurn)
+	{
+		_isMyTurn = isMyTurn;
+		if (_isMyTurn)
+		{
+			GD.Print("Turno iniciado para el jugador: " + Name);
+		}
+		else
+		{
+			GD.Print("Turno finalizado para el jugador: " + Name);
+		}
+	}
+	
 }
