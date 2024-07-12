@@ -193,3 +193,4 @@ position = Vector2(25, 0)
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_loe5r")
 animation = &"Iddle"
+frame_progress = 0.616037
