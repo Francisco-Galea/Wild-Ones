@@ -1,6 +1,6 @@
 [gd_scene load_steps=42 format=3 uid="uid://bc60gi3jnftcb"]
 
-[ext_resource type="Script" path="res://Player/player.cs" id="1_gim6e"]
+[ext_resource type="Script" path="res://Player/Player.cs" id="1_gim6e"]
 [ext_resource type="Texture2D" uid="uid://dwij36ptv5lvp" path="res://Player/Sprite/Dead (1).png" id="2_8tfrc"]
 [ext_resource type="Texture2D" uid="uid://b7hkb3xa1hr30" path="res://Player/Sprite/Dead (2).png" id="3_o4i3w"]
 [ext_resource type="Texture2D" uid="uid://ck0kjhvbvl526" path="res://Player/Sprite/Dead (3).png" id="4_3b00k"]
