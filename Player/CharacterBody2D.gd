@@ -35,9 +35,11 @@ func _shoot_projectile():
 	projectile.position = position
 	
 	var mouse_position = get_global_mouse_position()
-	var direction = (mouse_position - position).normalized()  # Calcula la dirección hacia el mouse
+	print("Mouse Position: ", mouse_position)  # Imprime la posición del mouse en la consola
 	
-	projectile.linear_velocity = direction * 600  # Ajusta la velocidad según necesites
+	var direction = (mouse_position - global_position).normalized()
+	print("Direction: ", direction)  # Imprime la dirección del proyectil
+	projectile.position = position + direction * 100
+	projectile.velocity = direction * 900  # Ajusta la velocidad según necesites
 	get_parent().add_child(projectile)
-	
 
