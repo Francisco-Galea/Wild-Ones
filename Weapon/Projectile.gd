@@ -1,12 +1,17 @@
 extends RigidBody2D
 
-var velocidad: float = 600
-var _gravity: float
+var velocity: Vector2 = Vector2.ZERO
 
 func _ready():
-	_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-	apply_impulse(Vector2.ZERO, Vector2(velocidad, -velocidad))  # Aplica una fuerza inicial al proyectil
+	# Establece la velocidad inicial del proyectil
+	linear_velocity = velocity
 
 func _physics_process(delta):
-	if position.y > 1000:  # Por ejemplo, si cae demasiado abajo, se elimina
+	# Si el proyectil cae fuera del área visible, se elimina
+	if position.y > 1000:  # Ajusta según sea necesario
 		queue_free()
+
+func _on_body_entered(body):
+	# Verifica si el proyectil colisiona con un objeto en los grupos 'terrain' o 'player'
+	if body.is_in_group("terrain") or body.is_in_group("player"):
+		queue_free()  # Elimina el proyectil al colisionar
