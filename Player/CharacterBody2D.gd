@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var velocidad: int = 500
 var _gravity: float
+var projectile_scene: PackedScene = preload("res://Weapon/Projectile.tscn")
 
 func _ready():
 	
@@ -10,6 +11,7 @@ func _ready():
 func _physics_process(delta):
 	
 	_handle_movement(delta)
+	 
 
 func _handle_movement(delta):
 	
@@ -22,5 +24,20 @@ func _handle_movement(delta):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = -velocidad
 	
+	if Input.is_action_just_pressed("shoot"):  # Asume que has configurado la acción "shoot" en las entradas de entrada
+		_shoot_projectile()
+		
 	velocity.normalized()
 	move_and_slide()
+
+func _shoot_projectile():
+	var projectile = projectile_scene.instantiate()
+	projectile.position = position
+	
+	var mouse_position = get_global_mouse_position()
+	var direction = (mouse_position - position).normalized()  # Calcula la dirección hacia el mouse
+	
+	projectile.linear_velocity = direction * 600  # Ajusta la velocidad según necesites
+	get_parent().add_child(projectile)
+	
+
