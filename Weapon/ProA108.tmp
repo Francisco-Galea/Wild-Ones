@@ -7,7 +7,6 @@
 radius = 32.0156
 
 [node name="Projectile" type="RigidBody2D" groups=["Player", "Terrain"]]
-collision_layer = 4
 script = ExtResource("1_4blka")
 metadata/_edit_group_ = true
 
