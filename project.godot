@@ -23,6 +23,7 @@ project/assembly_name="Wild Ones gd-script"
 folder_colors={
 "res://IdeasFuture/": "orange",
 "res://Player/": "green",
+"res://Weapon/": "purple",
 "res://World/": "yellow"
 }
 

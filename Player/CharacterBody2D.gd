@@ -24,7 +24,7 @@ func _handle_movement(delta):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = -velocidad
 	
-	if Input.is_action_just_pressed("shoot"):  # Asume que has configurado la acción "shoot" en las entradas de entrada
+	if Input.is_action_just_pressed("shoot"):  
 		_shoot_projectile()
 		
 	velocity.normalized()
