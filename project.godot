@@ -21,7 +21,9 @@ project/assembly_name="Wild Ones gd-script"
 [file_customization]
 
 folder_colors={
+"res://GameManager/": "pink",
 "res://IdeasFuture/": "orange",
+"res://Menu/": "blue",
 "res://Player/": "green",
 "res://Weapon/": "purple",
 "res://World/": "yellow"
