@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://bej7yk85m254i"]
+
+[ext_resource type="Script" path="res://Menu/Menu.gd" id="1_ogt83"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ogt83")
+
+[node name="Button2Players" type="Button" parent="."]
+layout_mode = 0
+offset_left = 297.0
+offset_top = 314.0
+offset_right = 395.0
+offset_bottom = 345.0
+text = "2 jugadores"
+
+[node name="Button3Players" type="Button" parent="."]
+layout_mode = 0
+offset_left = 605.0
+offset_top = 317.0
+offset_right = 703.0
+offset_bottom = 348.0
+text = "3 jugadores"
+
+[connection signal="pressed" from="Button2Players" to="." method="_on_Button2Players_pressed"]
+[connection signal="pressed" from="Button3Players" to="." method="_on_Button3Players_pressed"]
