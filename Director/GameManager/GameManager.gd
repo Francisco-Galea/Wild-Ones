@@ -1,10 +1,12 @@
 extends Node2D
 
 var player_scene: PackedScene = preload("res://Player/Player.tscn")
+var world_scene: PackedScene = preload("res://World/World.tscn")
 
 var player_count: int = 2
 
 func _ready():
+	_create_world()
 	_create_players()
 
 func set_player_count(count: int):
@@ -17,3 +19,7 @@ func _create_players():
 		# Ajusta la posición inicial de los jugadores aquí
 		player_instance.position = Vector2(100 * i + 100, 200)  # Ejemplo de posicionamiento
 		add_child(player_instance)
+
+func _create_world():
+	var world_instance = world_scene.instantiate()
+	add_child(world_instance)  # Añade el mundo como hijo del GameManager
