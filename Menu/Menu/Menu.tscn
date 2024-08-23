@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://bej7yk85m254i"]
 
-[ext_resource type="Script" path="res://Menu/Menu.gd" id="1_ogt83"]
+[ext_resource type="Script" path="res://Menu/Menu/Menu.gd" id="1_fhoec"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_ogt83")
+script = ExtResource("1_fhoec")
 
 [node name="Button2Players" type="Button" parent="."]
 layout_mode = 0
@@ -22,6 +22,16 @@ offset_top = 317.0
 offset_right = 703.0
 offset_bottom = 348.0
 text = "3 jugadores"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 293.0
+offset_top = 176.0
+offset_right = 700.0
+offset_bottom = 199.0
+text = "Seleccione cuantos jugadores van a jugar
+"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="Button2Players" to="." method="_on_Button2Players_pressed"]
 [connection signal="pressed" from="Button3Players" to="." method="_on_Button3Players_pressed"]

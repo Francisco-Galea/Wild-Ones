@@ -1,7 +1,6 @@
 extends Control
 
 func _ready():
-	
 	$Button2Players.connect("pressed", Callable(self, "_on_Button2Players_pressed"))
 	$Button3Players.connect("pressed", Callable(self, "_on_Button3Players_pressed"))
 
@@ -12,9 +11,7 @@ func _start_game(player_count: int):
 	get_tree().root.add_child(game_manager)
 
 func _on_Button2Players_pressed():
-	print("Button 2 Players Pressed")
 	_start_game(2)
 
 func _on_Button3Players_pressed():
-	print("Button 3 Players Pressed")
 	_start_game(3)
