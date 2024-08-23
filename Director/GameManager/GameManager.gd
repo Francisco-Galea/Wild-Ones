@@ -16,10 +16,9 @@ func _create_players():
 	for i in range(player_count):
 		var player_instance = player_scene.instantiate()
 		player_instance.name = "Player" + str(i + 1)
-		# Ajusta la posición inicial de los jugadores aquí
-		player_instance.position = Vector2(100 * i + 100, 200)  # Ejemplo de posicionamiento
+		player_instance.position = Vector2(100 * i + 100, 200)
 		add_child(player_instance)
 
 func _create_world():
 	var world_instance = world_scene.instantiate()
-	add_child(world_instance)  # Añade el mundo como hijo del GameManager
+	add_child(world_instance)
