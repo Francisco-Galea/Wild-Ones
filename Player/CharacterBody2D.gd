@@ -33,13 +33,13 @@ func _handle_movement(delta):
 func _shoot_projectile():
 	var projectile = projectile_scene.instantiate()
 	projectile.position = position
-	
 	var mouse_position = get_global_mouse_position()
-	print("Mouse Position: ", mouse_position)  # Imprime la posición del mouse en la consola
 	
+	#Direccion del proyectil
 	var direction = (mouse_position - global_position).normalized()
-	print("Direction: ", direction)  # Imprime la dirección del proyectil
 	projectile.position = position + direction * 100
-	projectile.velocity = direction * 900  # Ajusta la velocidad según necesites
+	
+	#Velocidad del proyectil
+	projectile.velocity = direction * 900 
 	get_parent().add_child(projectile)
 
