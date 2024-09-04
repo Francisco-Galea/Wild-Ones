@@ -5,7 +5,7 @@ var velocity: Vector2 = Vector2.ZERO
 func _ready():
 	linear_velocity = velocity
 
-func _physics_process(delta):
-	if position.y > 1000:  
-		queue_free()
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	queue_free()
 
