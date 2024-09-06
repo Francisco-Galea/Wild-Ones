@@ -127,9 +127,9 @@ texture = ExtResource("1_7813a")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_ev5mq")
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" groups=["Terrain"]]
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="." groups=["Terrain"]]
 position = Vector2(36, 0)
 tile_set = SubResource("TileSet_7gxur")
 format = 2
