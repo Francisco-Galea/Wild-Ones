@@ -5,7 +5,8 @@ var world_scene: PackedScene = preload("res://World/World.tscn")
 var player_count
 var players: Array = []
 var current_player_index: int = 0
-var turn_timer: Timer
+@onready var turn_timer: Timer = $TurnTimer
+@onready var grace_period_timer: Timer = $GracePeriodTimer
 
 func _ready():
 	create_world()
@@ -19,7 +20,7 @@ func create_players():
 	for i in range(player_count):
 		var player_instance = player_scene.instantiate()
 		player_instance.name = "Player" + str(i + 1)
-		player_instance.position = Vector2(100 * i + 100, 200)
+		player_instance.position = Vector2(200 * i + 200, 200)
 		add_child(player_instance)
 		players.append(player_instance)
 
@@ -28,26 +29,26 @@ func create_world():
 	add_child(world_instance)
 
 func initialize_turn_system():
-	turn_timer = Timer.new()
-	turn_timer.wait_time = 5  
-	turn_timer.one_shot = true
-	turn_timer.connect("timeout", Callable(self, "_on_turn_timeout"))
-	add_child(turn_timer)
 	start_turn()
 
 func start_turn():
-	turn_timer.start()
+	print("Periodo de gracia antes del turno de " + players[current_player_index].name)
+	grace_period_timer.start()  
+	set_players_turn_controls(false)  
+
+func set_players_turn_controls(enable: bool):
 	for i in range(players.size()):
-		players[i].set_turn(i == current_player_index)
-	var current_player = players[current_player_index]
-	print("Turno de " + current_player.name)
+		players[i].set_turn(enable and i == current_player_index)
 
 func end_turn():
-	var current_player = players[current_player_index]
-	current_player.set_turn(false)
-	current_player_index = (current_player_index + 1) % players.size()
+	players[current_player_index].set_turn(false)  
+	current_player_index = (current_player_index + 1) % players.size() 
 	start_turn()
 
-func _on_turn_timeout():
-	
+func _on_turn_timer_timeout():
 	end_turn()
+
+func _on_grace_period_timer_timeout():
+	print("Periodo de gracia finalizado. Turno de " + players[current_player_index].name)
+	turn_timer.start()
+	set_players_turn_controls(true) 
