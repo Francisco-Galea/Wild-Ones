@@ -9,6 +9,7 @@ var is_turn: bool = false
 func _ready():
 	gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 	set_physics_process(true) 
+	add_to_group("Players")
 
 func _physics_process(delta):
 	

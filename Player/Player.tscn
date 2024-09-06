@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cnocckpxf3ysx"]
+[gd_scene load_steps=34 format=3 uid="uid://cnocckpxf3ysx"]
 
 [ext_resource type="Script" path="res://Player/PlayerScript.gd" id="1_hgrnu"]
 [ext_resource type="Texture2D" uid="uid://ds0cmxktasfcf" path="res://Player/Sprite/Idle (1).png" id="2_70yna"]
@@ -144,39 +144,6 @@ animations = [{
 radius = 81.0
 height = 200.0
 
-[sub_resource type="GDScript" id="GDScript_t7ekl"]
-script/source = "extends Node
-
-# Señales para comunicar cambios de vida y la muerte
-signal vida_cambiada(nueva_vida: int)
-signal personaje_muerto
-
-var vida: int = 100
-var max_vida: int = 100
-
-# Método para recibir daño
-func recibir_dano(dano: int):
-	vida -= dano
-	if vida < 0:
-		vida = 0
-	emit_signal(\"vida_cambiada\", vida)  # Emitir señal cuando la vida cambie
-	
-	if vida == 0:
-		morir()
-
-# Método para curar
-func curar(cantidad: int):
-	vida += cantidad
-	if vida > max_vida:
-		vida = max_vida
-	emit_signal(\"vida_cambiada\", vida)  # Emitir señal cuando la vida cambie
-
-# Método para manejar la muerte
-func morir():
-	emit_signal(\"personaje_muerto\")
-	queue_free()  # O puedes usar otra lógica específica para la muerte
-"
-
 [node name="Player" type="CharacterBody2D" groups=["Players"]]
 position = Vector2(71, 1)
 script = ExtResource("1_hgrnu")
@@ -191,6 +158,3 @@ animation = &"Iddle"
 position = Vector2(-67, -3)
 rotation = 0.359538
 shape = SubResource("CapsuleShape2D_n7i58")
-
-[node name="Node" type="Node" parent="."]
-script = SubResource("GDScript_t7ekl")
