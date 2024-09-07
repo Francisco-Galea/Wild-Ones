@@ -128,6 +128,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_ev5mq")
 
 [node name="World" type="Node2D" groups=["Terrain"]]
+light_mask = 0
 
 [node name="TileMap" type="TileMap" parent="." groups=["Terrain"]]
 position = Vector2(36, 0)
