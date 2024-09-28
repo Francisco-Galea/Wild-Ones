@@ -31,7 +31,7 @@ func handle_movement():
 	
 	if Input.is_action_just_pressed("shoot"):
 		shoot_projectile()
-
+aaa
 func shoot_projectile():
 	var projectile = projectile_scene.instantiate()
 	projectile.position = position
