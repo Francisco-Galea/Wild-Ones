@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cnocckpxf3ysx"]
+[gd_scene load_steps=36 format=3 uid="uid://cnocckpxf3ysx"]
 
 [ext_resource type="Script" path="res://Player/PlayerScript.gd" id="1_hgrnu"]
 [ext_resource type="Texture2D" uid="uid://ds0cmxktasfcf" path="res://Player/Sprite/Idle (1).png" id="2_70yna"]
@@ -31,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://c2hg5qnx2s2up" path="res://Player/Sprite/Run (5).png" id="29_4dhfa"]
 [ext_resource type="Texture2D" uid="uid://dtbe4ywbo5rr0" path="res://Player/Sprite/Run (6).png" id="30_4xllk"]
 [ext_resource type="Texture2D" uid="uid://b3ickci0tlqgf" path="res://Player/Sprite/Run (7).png" id="31_31paa"]
+[ext_resource type="Script" path="res://Player/Health.gd" id="32_awdvc"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_18oix"]
 animations = [{
@@ -167,5 +168,8 @@ shape = SubResource("CapsuleShape2D_n7i58")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-66, 0)
 shape = SubResource("CapsuleShape2D_2tik2")
+
+[node name="Health" type="Node2D" parent="."]
+script = ExtResource("32_awdvc")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
