@@ -52,3 +52,20 @@ func _on_grace_period_timer_timeout():
 	print("Periodo de gracia finalizado. Turno de " + players[current_player_index].name)
 	turn_timer.start()
 	set_players_turn_controls(true) 
+
+func player_died(dead_player):
+	players.erase(dead_player)
+	if players.size() == 1:
+		end_game(players[0])
+	elif players.size() == 0:
+		end_game(null)
+	else:
+		if dead_player == players[current_player_index]:
+			end_turn()
+
+func end_game(winner):
+	if winner:
+		print("¡El juego ha terminado! El ganador es: " + winner.name)
+	else:
+		print("¡El juego ha terminado en empate!")
+
