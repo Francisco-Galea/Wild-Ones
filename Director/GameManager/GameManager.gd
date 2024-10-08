@@ -41,6 +41,7 @@ func set_players_turn_controls(enable: bool):
 		players[i].set_turn(enable and i == current_player_index)
 
 func end_turn():
+	turn_timer.stop() 
 	players[current_player_index].set_turn(false)  
 	current_player_index = (current_player_index + 1) % players.size() 
 	start_turn()
@@ -66,6 +67,4 @@ func player_died(dead_player):
 func end_game(winner):
 	if winner:
 		print("¡El juego ha terminado! El ganador es: " + winner.name)
-	else:
-		print("¡El juego ha terminado en empate!")
 

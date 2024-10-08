@@ -4,6 +4,7 @@ var velocidad: int = 500
 var gravity: float
 var projectile_scene: PackedScene = preload("res://Weapon/Projectile.tscn")
 var is_turn: bool = false
+var has_shot: bool = false  
 
 @onready var health_component: Node = $Health
 
@@ -14,7 +15,6 @@ func _ready():
 	health_component.connect("died", Callable(self, "_on_died"))
 
 func _physics_process(delta):
-	
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	else:
@@ -32,8 +32,10 @@ func handle_movement():
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = -velocidad
 	
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot") and not has_shot:
 		shoot_projectile()
+		has_shot = true
+		get_parent().end_turn()  
 
 func shoot_projectile():
 	var projectile = projectile_scene.instantiate()
@@ -46,12 +48,13 @@ func shoot_projectile():
 
 func set_turn(turn: bool):
 	is_turn = turn 
+	if turn:
+		has_shot = false  
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("bullets"):
-		health_component.take_damage(10)  
+		health_component.take_damage(50)  
 		body.queue_free()
-		
 		
 func _on_died():
 	print(name + " ha muerto!")
