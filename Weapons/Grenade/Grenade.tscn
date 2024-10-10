@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://bw03mi6lw6kqi"]
+
+[ext_resource type="Script" path="res://Weapons/Grenade/Grenade.gd" id="1_mb82p"]
+[ext_resource type="Texture2D" uid="uid://bnxdv4c401w3t" path="res://Weapons/Sprites/accorn_ammo.png" id="2_88l2j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5lvo1"]
+radius = 25.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ebccq"]
+radius = 125.0
+
+[node name="Grenade" type="RigidBody2D"]
+script = ExtResource("1_mb82p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.0984848, 0.0751634)
+texture = ExtResource("2_88l2j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5lvo1")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ebccq")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true

@@ -1,18 +1,26 @@
+# Player/PlayerScript.gd
 extends CharacterBody2D
 
 var velocidad: int = 500
 var gravity: float
-var projectile_scene: PackedScene = preload("res://Weapon/Projectile.tscn")
 var is_turn: bool = false
-var has_shot: bool = false  
+var has_shot: bool = false
 
 @onready var health_component: Node = $Health
+var current_weapon: WeaponStrategy
+
+var weapons: Array = [
+	BasicGunStrategy.new(),
+	GrenadeStrategy.new(),
+	# Add more weapons here as you implement them
+]
 
 func _ready():
 	gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-	set_physics_process(true) 
+	set_physics_process(true)
 	add_to_group("Players")
 	health_component.connect("died", Callable(self, "_on_died"))
+	current_weapon = weapons[0]  # Set default weapon to BasicGun
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -21,11 +29,12 @@ func _physics_process(delta):
 		velocity.y = 0
 	
 	if is_turn:
-		handle_movement()
+		handle_movement(delta)
+		handle_weapon_switch()
 	
 	move_and_slide()
 
-func handle_movement():
+func handle_movement(delta):
 	var input_direction = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	velocity.x = input_direction * velocidad
 	
@@ -35,25 +44,30 @@ func handle_movement():
 	if Input.is_action_just_pressed("shoot") and not has_shot:
 		shoot_projectile()
 		has_shot = true
-		get_parent().end_turn()  
+		get_parent().end_turn()
+
+func handle_weapon_switch():
+	if Input.is_action_just_pressed("switch_weapon_1"):
+		current_weapon = weapons[0]
+		print("Switched to " + current_weapon.get_name())
+	elif Input.is_action_just_pressed("switch_weapon_2"):
+		current_weapon = weapons[1]
+		print("Switched to " + current_weapon.get_name())
 
 func shoot_projectile():
-	var projectile = projectile_scene.instantiate()
-	projectile.position = position
 	var mouse_position = get_global_mouse_position()
 	var direction = (mouse_position - global_position).normalized()
-	projectile.position = position + direction * 100
-	projectile.velocity = direction * 900
-	get_parent().add_child(projectile)
+	var projectile = current_weapon.shoot(global_position, direction)
+	get_tree().root.add_child(projectile)
 
 func set_turn(turn: bool):
 	is_turn = turn 
 	if turn:
-		has_shot = false  
+		has_shot = false
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("bullets"):
-		health_component.take_damage(50)  
+		health_component.take_damage(current_weapon.get_damage())
 		body.queue_free()
 		
 func _on_died():
@@ -61,3 +75,6 @@ func _on_died():
 	set_physics_process(false)
 	queue_free()
 	get_parent().player_died(self)
+
+func take_damage(amount: int):
+	health_component.take_damage(amount)

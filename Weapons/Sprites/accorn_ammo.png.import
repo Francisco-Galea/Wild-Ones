@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ceema5nk6tgyg"
-path="res://.godot/imported/accorn_ammo.png-e9863d6095f8e80daa86e27746868c38.ctex"
+uid="uid://bnxdv4c401w3t"
+path="res://.godot/imported/accorn_ammo.png-35df7c22fdfa0aab6f73cfa57e18c034.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Weapon/Sprites/accorn_ammo.png"
-dest_files=["res://.godot/imported/accorn_ammo.png-e9863d6095f8e80daa86e27746868c38.ctex"]
+source_file="res://Weapons/Sprites/accorn_ammo.png"
+dest_files=["res://.godot/imported/accorn_ammo.png-35df7c22fdfa0aab6f73cfa57e18c034.ctex"]
 
 [params]
 
