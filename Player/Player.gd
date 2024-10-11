@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var velocidad: int = 500
+var velocidad: int = 100
 var gravity: float
 var is_turn: bool = false
 var has_shot: bool = false

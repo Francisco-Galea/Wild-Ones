@@ -1,7 +1,6 @@
-# Weapons/BasicGun/BasicBullet.gd
 extends RigidBody2D
 
-var damage = 10
+var damage 
 
 func _ready():
 	add_to_group("bullets")

@@ -1,6 +1,4 @@
-# World/SpawnManager.gd
 extends Node2D
-
 class_name SpawnManager
 
 var spawn_points: Array[Node] = []

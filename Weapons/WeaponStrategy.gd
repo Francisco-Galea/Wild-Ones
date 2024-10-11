@@ -1,4 +1,3 @@
-# Weapons/WeaponStrategy.gd
 extends Node
 class_name WeaponStrategy
 

@@ -1,10 +1,12 @@
 extends RigidBody2D
 
-var explosion_damage = 50
-@onready var explosion_sound = $AudioStreamPlayer2D
+var explosion_damage
+@onready var explosion_sound = $explosion
+@onready  var fire_in_the_hole = $throwGrenade
 
 func _ready():
 	$Timer.start()
+	fire_in_the_hole.play()
 
 func _on_timer_timeout():
 	explode()
@@ -14,7 +16,6 @@ func explode():
 	var bodies = explosion_area.get_overlapping_bodies()
 	for body in bodies:
 		if body.has_method("take_damage") and body != self:
-			print("Dealing " + str(explosion_damage) + " damage to " + body.name)
 			body.take_damage(explosion_damage)
 	hide()
 	explosion_sound.play()
@@ -23,3 +24,5 @@ func explode():
 
 func get_damage():
 	return explosion_damage
+
+
