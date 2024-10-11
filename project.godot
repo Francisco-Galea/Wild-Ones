@@ -26,6 +26,7 @@ folder_colors={
 "res://IdeasFuture/": "orange",
 "res://Menu/": "blue",
 "res://Player/": "green",
+"res://Weapons/": "purple",
 "res://World/": "yellow"
 }
 

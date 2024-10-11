@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bw03mi6lw6kqi"]
+[gd_scene load_steps=6 format=3 uid="uid://bw03mi6lw6kqi"]
 
 [ext_resource type="Script" path="res://Weapons/Grenade/Grenade.gd" id="1_mb82p"]
-[ext_resource type="Texture2D" uid="uid://bnxdv4c401w3t" path="res://Weapons/Sprites/accorn_ammo.png" id="2_88l2j"]
+[ext_resource type="Texture2D" uid="uid://chjftg3xc5woj" path="res://Weapons/Sprites/Grenade.png" id="2_e8idm"]
+[ext_resource type="AudioStream" uid="uid://c4xjf6wcvfy3c" path="res://Weapons/Sounds/grenadeExploSound.wav" id="3_8jfac"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5lvo1"]
 radius = 25.0
@@ -13,8 +14,7 @@ radius = 125.0
 script = ExtResource("1_mb82p")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.0984848, 0.0751634)
-texture = ExtResource("2_88l2j")
+texture = ExtResource("2_e8idm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5lvo1")
@@ -27,3 +27,9 @@ shape = SubResource("CircleShape2D_ebccq")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_8jfac")
+volume_db = 8.914
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

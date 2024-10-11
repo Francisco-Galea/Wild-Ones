@@ -9,7 +9,7 @@ func shoot(start_position: Vector2, direction: Vector2) -> Node2D:
 	return projectile
 
 func get_damage() -> int:
-	return 33
+	return 100
 
 func get_projectile_speed() -> float:
 	return 200.0
