@@ -7,6 +7,8 @@ var players: Array = []
 var current_player_index: int = 0
 @onready var turn_timer: Timer = $TurnTimer
 @onready var grace_period_timer: Timer = $GracePeriodTimer
+var world_instance: Node
+var spawn_manager: SpawnManager
 
 func _ready():
 	create_world()
@@ -17,16 +19,20 @@ func set_player_count(count: int):
 	player_count = count
 
 func create_players():
+	spawn_manager.reset_available_spawn_points()
 	for i in range(player_count):
 		var player_instance = player_scene.instantiate()
 		player_instance.name = "Player" + str(i + 1)
-		player_instance.position = Vector2(200 * i + 200, 200)
+		player_instance.position = spawn_manager.get_random_spawn_point()
 		add_child(player_instance)
 		players.append(player_instance)
 
 func create_world():
 	var world_instance = world_scene.instantiate()
 	add_child(world_instance)
+	spawn_manager = world_instance.get_node("SpawnPoints") as SpawnManager
+	if spawn_manager == null:
+		push_error("SpawnPoints node not found in World scene!")
 
 func initialize_turn_system():
 	start_turn()
@@ -56,15 +62,7 @@ func _on_grace_period_timer_timeout():
 
 func player_died(dead_player):
 	players.erase(dead_player)
-	if players.size() == 1:
-		end_game(players[0])
-	elif players.size() == 0:
-		end_game(null)
-	else:
-		if dead_player == players[current_player_index]:
-			end_turn()
+	if dead_player == players[current_player_index]:
+		end_turn()
 
-func end_game(winner):
-	if winner:
-		print("¡El juego ha terminado! El ganador es: " + winner.name)
 

@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bq8a3h5mabgwk"]
+
+[ext_resource type="Script" path="res://Weapons/WeaponSelector.gd" id="1_ngynd"]
+
+[node name="WeaponSelector" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ngynd")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 663.0
+offset_top = 219.0
+offset_right = 794.0
+offset_bottom = 250.0
+text = "Select basic gun
+"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
