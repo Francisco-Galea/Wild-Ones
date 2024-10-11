@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dt3g3no055v8x"]
+
+[ext_resource type="Script" path="res://Director/GameManager/GameManager.gd" id="1_svk51"]
+
+[node name="GameManager" type="Node2D"]
+script = ExtResource("1_svk51")
+
+[node name="TurnTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="GracePeriodTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="TurnTimer" to="." method="_on_turn_timer_timeout"]
+[connection signal="timeout" from="GracePeriodTimer" to="." method="_on_grace_period_timer_timeout"]
