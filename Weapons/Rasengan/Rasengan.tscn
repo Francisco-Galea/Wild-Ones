@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://ck756poeie70r"]
+
+[ext_resource type="Script" path="res://Weapons/Rasengan/Rasengan.gd" id="1_pc5bn"]
+[ext_resource type="Texture2D" uid="uid://ccfmspxbnjgh0" path="res://Weapons/Sprites/rasenganAttept.png" id="1_y2clq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b4cg2"]
+radius = 23.0
+
+[node name="Rasengan" type="RigidBody2D" groups=["projectiles"]]
+gravity_scale = 0.0
+script = ExtResource("1_pc5bn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.779593, 0.730699)
+texture = ExtResource("1_y2clq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_b4cg2")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

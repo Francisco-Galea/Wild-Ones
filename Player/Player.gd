@@ -9,7 +9,7 @@ var has_shot: bool = false
 var current_weapon: WeaponStrategy
 
 var weapons: Array = [
-	BasicGunStrategy.new(),
+	RasenganStrategy.new(),
 	GrenadeStrategy.new(),
 ]
 
@@ -17,30 +17,28 @@ func _ready():
 	gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 	set_physics_process(true)
 	add_to_group("Players")
-	health_component.connect("died", Callable(self, "_on_died"))
-	current_weapon = weapons[0]  # Set default weapon to BasicGun
-	$Area2D.connect("body_entered", Callable(self, "_on_area_2d_body_entered"))
+	current_weapon = weapons[0]  
 
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	else:
 		velocity.y = 0
-
+	
 	if is_turn:
 		handle_movement(delta)
 		handle_weapon_switch()
-
+	
 	move_and_slide()
 
 func handle_movement(delta):
 	var input_direction = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	velocity.x = input_direction * velocidad
-
-
+	
+	
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = -velocidad
-
+	
 	if Input.is_action_just_pressed("shoot") and not has_shot:
 		shoot_projectile()
 		has_shot = true
@@ -66,8 +64,8 @@ func set_turn(turn: bool):
 		has_shot = false
 
 func _on_area_2d_body_entered(body):
-	if body.is_in_group("bullets"):
-		take_damage(body.get_damage())
+	if body.is_in_group("projectiles"):
+		take_damage(current_weapon.get_damage())
 		body.queue_free()
 
 func take_damage(amount: int):

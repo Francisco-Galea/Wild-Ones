@@ -5,10 +5,11 @@ var world_scene: PackedScene = preload("res://World/World.tscn")
 var player_count
 var players: Array = []
 var current_player_index: int = 0
-@onready var turn_timer: Timer = $TurnTimer
-@onready var grace_period_timer: Timer = $GracePeriodTimer
 var world_instance: Node
 var spawn_manager: SpawnManager
+@onready var turn_timer: Timer = $TurnTimer
+@onready var grace_period_timer: Timer = $GracePeriodTimer
+
 
 func _ready():
 	create_world()
@@ -31,8 +32,6 @@ func create_world():
 	var world_instance = world_scene.instantiate()
 	add_child(world_instance)
 	spawn_manager = world_instance.get_node("SpawnPoints") as SpawnManager
-	if spawn_manager == null:
-		push_error("SpawnPoints node not found in World scene!")
 
 func initialize_turn_system():
 	start_turn()

@@ -1,11 +1,13 @@
 extends WeaponStrategy
 class_name GrenadeStrategy
 
+var grenade_scene: PackedScene = preload("res://Weapons/Grenade/Grenade.tscn")
+
 func shoot(start_position: Vector2, direction: Vector2) -> Node2D:
-	var projectile = preload("res://Weapons/Grenade/Grenade.tscn").instantiate()
+	var projectile = grenade_scene.instantiate()
 	projectile.position = start_position
 	projectile.linear_velocity = direction * get_projectile_speed()
-	projectile.explosion_damage = get_damage()
+	projectile.set_damage(get_damage())
 	return projectile
 
 func get_damage() -> int:

@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-var explosion_damage
+var explosion_damage: int
 @onready var explosion_sound = $explosion
 @onready  var fire_in_the_hole = $throwGrenade
 
@@ -22,7 +22,7 @@ func explode():
 	await explosion_sound.finished
 	queue_free()
 
-func get_damage():
-	return explosion_damage
+func set_damage(damage: int):
+	explosion_damage = damage
 
 
