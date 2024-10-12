@@ -9,13 +9,14 @@ radius = 7.0
 height = 46.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rh505"]
+radius = 8.0
 height = 50.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_mffje")
-metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("2_biaib")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -30,5 +31,8 @@ shape = SubResource("CapsuleShape2D_rh505")
 
 [node name="Health" type="Node2D" parent="."]
 script = ExtResource("32_awdvc")
+
+[node name="projectile_spawn_point" type="Marker2D" parent="."]
+position = Vector2(30, -24)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

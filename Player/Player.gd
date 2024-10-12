@@ -1,11 +1,12 @@
 extends CharacterBody2D
 
-var velocidad: int = 100
+var velocidad: int = 200
 var gravity: float
 var is_turn: bool = false
 var has_shot: bool = false
 
 @onready var health_component: Node = $Health
+@onready var projectile_spawn_point: Marker2D = $projectile_spawn_point
 var current_weapon: WeaponStrategy
 
 var weapons: Array = [
@@ -35,7 +36,6 @@ func handle_movement(delta):
 	var input_direction = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	velocity.x = input_direction * velocidad
 	
-	
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = -velocidad
 	
@@ -54,8 +54,8 @@ func handle_weapon_switch():
 
 func shoot_projectile():
 	var mouse_position = get_global_mouse_position()
-	var direction = (mouse_position - global_position).normalized()
-	var projectile = current_weapon.shoot(global_position, direction)
+	var direction = (mouse_position - projectile_spawn_point.global_position).normalized()
+	var projectile = current_weapon.shoot(projectile_spawn_point.global_position, direction)
 	get_tree().root.add_child(projectile)
 
 func set_turn(turn: bool):
