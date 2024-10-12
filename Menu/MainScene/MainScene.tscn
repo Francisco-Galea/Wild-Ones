@@ -38,5 +38,5 @@ stream = ExtResource("2_7c4jc")
 volume_db = -12.876
 autoplay = true
 
-[connection signal="pressed" from="ButtonPlay" to="." method="_on_buttonPlay_pressed"]
+[connection signal="pressed" from="ButtonPlay" to="." method="_on_button_play_pressed"]
 [connection signal="pressed" from="ButtonExitGame" to="." method="_on_buttonExit_game_pressed"]

@@ -4,15 +4,13 @@ var velocidad: int = 200
 var gravity: float
 var is_turn: bool = false
 var has_shot: bool = false
-
-@onready var health_component: Node = $Health
-@onready var projectile_spawn_point: Marker2D = $projectile_spawn_point
 var current_weapon: WeaponStrategy
-
 var weapons: Array = [
 	RasenganStrategy.new(),
 	GrenadeStrategy.new(),
 ]
+@onready var health_component: Node = $Health
+@onready var projectile_spawn_point: Marker2D = $projectile_spawn_point
 
 func _ready():
 	gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -27,12 +25,12 @@ func _physics_process(delta):
 		velocity.y = 0
 	
 	if is_turn:
-		handle_movement(delta)
+		handle_movement()
 		handle_weapon_switch()
 	
 	move_and_slide()
 
-func handle_movement(delta):
+func handle_movement():
 	var input_direction = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	velocity.x = input_direction * velocidad
 	
