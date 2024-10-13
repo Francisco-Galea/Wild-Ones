@@ -19,6 +19,3 @@ func destroy_terrain(tilemap: TileMap, impact_position: Vector2):
 
 func set_damage(damage: int):
 	damage_rasengan = damage
-
-func _on_visible_on_screen_notifier_2d_screen_exited():
-	queue_free()

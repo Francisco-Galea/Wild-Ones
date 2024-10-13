@@ -6,8 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_b4cg2"]
 radius = 23.0
 
-[node name="Rasengan" type="RigidBody2D" groups=["projectiles"]]
-collision_layer = 2
+[node name="Rasengan" type="RigidBody2D"]
 gravity_scale = 0.0
 max_contacts_reported = 10
 contact_monitor = true

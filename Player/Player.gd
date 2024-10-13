@@ -8,7 +8,6 @@ var current_weapon: WeaponStrategy
 var weapons: Array = [
 	GrenadeStrategy.new(),
 ]
-
 @onready var health_component: Node = $Health
 @onready var projectile_spawn_point: Marker2D = $projectile_spawn_point
 
