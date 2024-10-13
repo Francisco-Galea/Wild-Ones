@@ -6,11 +6,11 @@
 script = ExtResource("1_svk51")
 
 [node name="TurnTimer" type="Timer" parent="."]
-wait_time = 15.0
+wait_time = 30.0
 one_shot = true
 
 [node name="GracePeriodTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 2.0
 one_shot = true
 
 [connection signal="timeout" from="TurnTimer" to="." method="_on_turn_timer_timeout"]

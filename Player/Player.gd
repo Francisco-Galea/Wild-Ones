@@ -7,7 +7,11 @@ var has_shot: bool = false
 var current_weapon: WeaponStrategy
 var weapons: Array = [
 	GrenadeStrategy.new(),
+	RasenganStrategy.new(),
+	KamehaStrategy.new(),
+	GasGrenadeStrategy.new()
 ]
+#De armas solo debe quedar la granada
 @onready var health_component: Node = $Health
 @onready var projectile_spawn_point: Marker2D = $projectile_spawn_point
 
@@ -47,6 +51,12 @@ func handle_weapon_switch():
 		print("Switched to " + current_weapon.get_name())
 	elif Input.is_action_just_pressed("switch_weapon_2") and weapons.size() > 1:
 		current_weapon = weapons[1]
+		print("Switched to " + current_weapon.get_name())
+	elif Input.is_action_just_pressed("switch_weapon_3") and weapons.size() > 2:
+		current_weapon = weapons[2]
+		print("Switched to " + current_weapon.get_name())
+	elif Input.is_action_just_pressed("switch_weapon_4") and weapons.size() > 3:
+		current_weapon = weapons[3]
 		print("Switched to " + current_weapon.get_name())
 
 func shoot_projectile():

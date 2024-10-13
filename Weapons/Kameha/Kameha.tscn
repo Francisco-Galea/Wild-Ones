@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://brit8l38dpgai"]
+
+[ext_resource type="Texture2D" uid="uid://bo7jybrllxxl2" path="res://Weapons/Sprites/kameha.png" id="1_rap43"]
+[ext_resource type="Script" path="res://Weapons/Kameha/Kameha.gd" id="2_tngw7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eqmqi"]
+radius = 16.0
+height = 38.0
+
+[node name="Kameha" type="RigidBody2D"]
+mass = 30.0
+gravity_scale = 0.0
+max_contacts_reported = 10
+contact_monitor = true
+script = ExtResource("2_tngw7")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_rap43")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(15, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_eqmqi")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

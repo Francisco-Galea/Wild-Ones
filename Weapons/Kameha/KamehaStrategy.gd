@@ -1,10 +1,10 @@
 extends WeaponStrategy
-class_name RasenganStrategy
+class_name KamehaStrategy
 
-var rasengan_scene : PackedScene = preload("res://Weapons/Rasengan/Rasengan.tscn")
+var kameha_scene : PackedScene = preload("res://Weapons/Kameha/Kameha.tscn")
 
 func shoot(start_position: Vector2, direction: Vector2) -> Node2D:
-	var projectile = rasengan_scene.instantiate()
+	var projectile = kameha_scene.instantiate()
 	projectile.position = start_position
 	projectile.linear_velocity = direction * get_projectile_speed()
 	projectile.set_damage(get_damage())
@@ -15,4 +15,4 @@ func get_damage() -> int:
 #El daño final será de 35
 
 func get_projectile_speed() -> float:
-	return 800
+	return 500

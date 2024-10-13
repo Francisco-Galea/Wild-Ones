@@ -1,14 +1,14 @@
 extends RigidBody2D
 
-var damage_rasengan
-var destruction_radius: int = 4
+var damage_kameha
+var destruction_radius: int = 5
 
 func _on_body_entered(body):
 	if body.has_method("take_damage"):
-		body.take_damage(damage_rasengan)
-		queue_free()
+		body.take_damage(damage_kameha)
 	if body is TileMap:
 		destroy_terrain(body, global_position)
+	queue_free()
 
 func destroy_terrain(tilemap: TileMap, impact_position: Vector2):
 	for x in range(-destruction_radius, destruction_radius + 1):
@@ -18,7 +18,4 @@ func destroy_terrain(tilemap: TileMap, impact_position: Vector2):
 			tilemap.set_cell(0, tile_pos, -1)  
 
 func set_damage(damage: int):
-	damage_rasengan = damage
-
-func _on_visible_on_screen_notifier_2d_screen_exited():
-	queue_free()
+	damage_kameha = damage

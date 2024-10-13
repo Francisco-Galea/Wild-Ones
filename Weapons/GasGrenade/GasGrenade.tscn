@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://dm610ud53sv8x"]
+
+[ext_resource type="Script" path="res://Weapons/GasGrenade/GasGrenade.gd" id="1_g138y"]
+[ext_resource type="Texture2D" uid="uid://bnxdv4c401w3t" path="res://Weapons/Sprites/accorn_ammo.png" id="2_flpsh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0wpru"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ppl30"]
+radius = 50.0
+
+[node name="GasGrenade" type="RigidBody2D"]
+script = ExtResource("1_g138y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.0283182, 0.020098)
+texture = ExtResource("2_flpsh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0wpru")
+
+[node name="ExplosionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea"]
+shape = SubResource("CircleShape2D_ppl30")
+
+[node name="GasParticles" type="CPUParticles2D" parent="ExplosionArea"]
+emitting = false
+amount = 5000
+lifetime = 5.0
+one_shot = true
+spread = 180.0
+gravity = Vector2(0, -10)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+color = Color(0.498039, 1, 0.498039, 0.498039)
+
+[node name="NadeWaitTime" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="DamageTicksTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="NadeWaitTime" to="." method="_on_nade_wait_time_timeout"]
+[connection signal="timeout" from="DamageTicksTimer" to="." method="_on_damage_ticks_time_timeout"]

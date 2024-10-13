@@ -5,8 +5,10 @@ signal weapon_collected(weapon_strategy)
 var fall_speed: float = 100.0
 var is_on_ground: bool = false
 var weapons = [
-	preload("res://Weapons/Rasengan/RasenganStrategy.gd")
+	preload("res://Weapons/Rasengan/RasenganStrategy.gd"),
+	preload("res://Weapons/Kameha/KamehaStrategy.gd")
 ]
+
 
 func _physics_process(delta):
 	if not is_on_ground: 

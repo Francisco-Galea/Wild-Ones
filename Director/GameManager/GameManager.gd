@@ -1,5 +1,8 @@
 extends Node2D
 
+# Importante: El periodo de gracia cambiarlo a 10 segundos
+# Importante: El tiempo de turno cambiarlo a 20
+
 var player_scene: PackedScene = preload("res://Player/Player.tscn")
 var world_scene: PackedScene = preload("res://World/World.tscn")
 var player_count
@@ -16,12 +19,8 @@ func _ready():
 	create_world()
 	create_players()
 	initialize_turn_system()
-	if drop_manager_scene != null:
-		drop_manager = drop_manager_scene.instantiate()
-		add_child(drop_manager)
-		print("pinga")
-	else:
-		print("Error: No se pudo precargar la escena DropManager.")
+	drop_manager = drop_manager_scene.instantiate()
+	add_child(drop_manager)
 
 func set_player_count(count: int):
 	player_count = count
