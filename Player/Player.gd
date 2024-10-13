@@ -6,9 +6,9 @@ var is_turn: bool = false
 var has_shot: bool = false
 var current_weapon: WeaponStrategy
 var weapons: Array = [
-	RasenganStrategy.new(),
 	GrenadeStrategy.new(),
 ]
+
 @onready var health_component: Node = $Health
 @onready var projectile_spawn_point: Marker2D = $projectile_spawn_point
 
@@ -46,7 +46,7 @@ func handle_weapon_switch():
 	if Input.is_action_just_pressed("switch_weapon_1"):
 		current_weapon = weapons[0]
 		print("Switched to " + current_weapon.get_name())
-	elif Input.is_action_just_pressed("switch_weapon_2"):
+	elif Input.is_action_just_pressed("switch_weapon_2") and weapons.size() > 1:
 		current_weapon = weapons[1]
 		print("Switched to " + current_weapon.get_name())
 
@@ -80,4 +80,5 @@ func _on_died():
 	
 func collect_weapon(weapon_strategy):
 	weapons.append(weapon_strategy)
+	current_weapon = weapon_strategy
 	print(name + " collected " + weapon_strategy.get_name())

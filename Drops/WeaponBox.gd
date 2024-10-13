@@ -17,6 +17,7 @@ func _on_body_entered(body):
 	if body.is_in_group("Players"):
 		var random_weapon = weapons[randi() % weapons.size()].new()
 		emit_signal("weapon_collected", random_weapon)
+		body.collect_weapon(random_weapon)
 		queue_free()
 	if not is_on_ground:  
 		is_on_ground = true  

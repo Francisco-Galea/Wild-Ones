@@ -2,7 +2,6 @@ extends RigidBody2D
 
 var damage_rasengan
 var destruction_radius: int = 2
-@onready var sound = $AudioStreamPlayer
 
 func _on_body_entered(body):
 	if body.has_method("take_damage"):
