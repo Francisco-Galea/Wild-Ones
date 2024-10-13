@@ -60,10 +60,11 @@ func set_turn(turn: bool):
 	if turn:
 		has_shot = false
 
-func _on_area_2d_body_entered(body):
-	if body.is_in_group("projectiles"):
-		take_damage(current_weapon.get_damage())
-		body.queue_free()
+#
+#func _on_area_2d_body_entered(body):
+#	if body.is_in_group("projectiles"):
+#		take_damage(current_weapon.get_damage())
+#		body.queue_free()
 
 func take_damage(amount: int):
 	print(name + " took " + str(amount) + " damage!")
