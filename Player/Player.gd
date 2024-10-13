@@ -77,3 +77,7 @@ func _on_died():
 	set_physics_process(false)
 	queue_free()
 	get_parent().player_died(self)
+	
+func collect_weapon(weapon_strategy):
+	weapons.append(weapon_strategy)
+	print(name + " collected " + weapon_strategy.get_name())

@@ -9,12 +9,19 @@ var world_instance: Node
 var spawn_manager: SpawnManager
 @onready var turn_timer: Timer = $TurnTimer
 @onready var grace_period_timer: Timer = $GracePeriodTimer
-
+var drop_manager_scene: PackedScene = preload("res://Director/DropManager/DropManager.tscn")  
+var drop_manager: Node2D  
 
 func _ready():
 	create_world()
 	create_players()
 	initialize_turn_system()
+	if drop_manager_scene != null:
+		drop_manager = drop_manager_scene.instantiate()
+		add_child(drop_manager)
+		print("pinga")
+	else:
+		print("Error: No se pudo precargar la escena DropManager.")
 
 func set_player_count(count: int):
 	player_count = count

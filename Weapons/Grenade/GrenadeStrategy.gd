@@ -14,5 +14,5 @@ func get_damage() -> int:
 	return 40
 
 func get_projectile_speed() -> float:
-	return 350.0
+	return 600.0
 
