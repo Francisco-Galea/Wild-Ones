@@ -7,7 +7,10 @@
 radius = 23.0
 
 [node name="Rasengan" type="RigidBody2D" groups=["projectiles"]]
+collision_layer = 2
 gravity_scale = 0.0
+max_contacts_reported = 10
+contact_monitor = true
 script = ExtResource("1_pc5bn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
