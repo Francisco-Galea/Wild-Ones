@@ -7,7 +7,7 @@ var has_shot: bool = false
 var current_weapon: WeaponStrategy
 var weapons: Array = [
 	GrenadeStrategy.new(),
-
+	
 ]
 #De armas solo debe quedar la granada
 @onready var health_component: Node = $Health
