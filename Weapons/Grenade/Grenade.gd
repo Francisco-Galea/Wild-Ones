@@ -4,6 +4,7 @@ var explosion_damage: int
 var destruction_radius: int = 1
 @onready var explosion_sound = $explosion
 @onready  var fire_in_the_hole = $throwGrenade
+@onready var explosion_animation = $Sprite2D/AnimationPlayer
 
 func _ready():
 	$Timer.start()
@@ -13,6 +14,8 @@ func _on_timer_timeout():
 	explode()
 
 func explode():
+	explosion_animation.play("explosion")
+	explosion_sound.play()
 	var explosion_area = $Area2D
 	var bodies = explosion_area.get_overlapping_bodies()
 	for body in bodies:
@@ -20,10 +23,10 @@ func explode():
 			body.take_damage(explosion_damage)
 		if body is TileMap:
 			destroy_terrain(body, global_position)
-	hide()
-	explosion_sound.play()
+	await explosion_animation.animation_finished
 	await explosion_sound.finished
 	queue_free()
+
 
 func destroy_terrain(tilemap: TileMap, impact_position: Vector2):
 	for x in range(-destruction_radius, destruction_radius + 1):
