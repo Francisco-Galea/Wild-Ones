@@ -2,6 +2,10 @@ extends RigidBody2D
 
 var damage_kameha
 var destruction_radius: int = 5
+@onready var sound = $LaunchSound
+
+func _ready():
+	sound.play()
 
 func _on_body_entered(body):
 	if body.has_method("take_damage"):
@@ -19,3 +23,6 @@ func destroy_terrain(tilemap: TileMap, impact_position: Vector2):
 
 func set_damage(damage: int):
 	damage_kameha = damage
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	queue_free()

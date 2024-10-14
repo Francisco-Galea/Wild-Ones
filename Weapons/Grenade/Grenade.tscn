@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://ccy1lo7d1gave" path="res://Weapons/Sounds/ct_fireinhole.wav" id="4_20ufl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5lvo1"]
-radius = 8.06226
+radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ebccq"]
 radius = 125.0
@@ -15,19 +15,24 @@ radius = 125.0
 mass = 0.23
 script = ExtResource("1_mb82p")
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("2_e8idm")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_5lvo1")
+metadata/_edit_lock_ = true
 
 [node name="Area2D" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_ebccq")
+metadata/_edit_lock_ = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
@@ -36,8 +41,11 @@ one_shot = true
 [node name="explosion" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_8jfac")
 volume_db = 8.914
+metadata/_edit_lock_ = true
 
 [node name="throwGrenade" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_20ufl")
+metadata/_edit_lock_ = true
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

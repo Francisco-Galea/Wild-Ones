@@ -17,3 +17,5 @@ func get_damage() -> int:
 func get_projectile_speed() -> float:
 	return 600.0
 
+func get_weapon_description() -> String:
+	return "Tiro lata A"

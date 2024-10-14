@@ -1069,21 +1069,27 @@ metadata/_edit_lock_ = true
 
 [node name="SpawnPoints" type="Node2D" parent="."]
 script = ExtResource("3_dwlq3")
+metadata/_edit_lock_ = true
 
 [node name="SpawnPoint1" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(752, 512)
+metadata/_edit_lock_ = true
 
 [node name="SpawnPoint2" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(169, 135)
+metadata/_edit_lock_ = true
 
 [node name="SpawnPoint3" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(153, 554)
+metadata/_edit_lock_ = true
 
 [node name="SpawnPoint4" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(1083, 453)
+metadata/_edit_lock_ = true
 
 [node name="SpawnPoint5" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(808, 134)
+metadata/_edit_lock_ = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -1091,25 +1097,31 @@ position = Vector2(808, 134)
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(575, 322)
-scale = Vector2(2.31653, 2.36765)
+position = Vector2(577.25, 325)
+scale = Vector2(2.3256, 2.38971)
 texture = ExtResource("3_yqm17")
 metadata/_edit_lock_ = true
 
 [node name="DropPoints" type="Node2D" parent="."]
 script = ExtResource("5_gdohi")
+metadata/_edit_lock_ = true
 
 [node name="DropPoint1" type="Marker2D" parent="DropPoints"]
 position = Vector2(811, -2)
+metadata/_edit_lock_ = true
 
 [node name="DropPoint2" type="Marker2D" parent="DropPoints"]
 position = Vector2(581, -2)
+metadata/_edit_lock_ = true
 
 [node name="DropPoint3" type="Marker2D" parent="DropPoints"]
 position = Vector2(1065, -3)
+metadata/_edit_lock_ = true
 
 [node name="DropPoint4" type="Marker2D" parent="DropPoints"]
 position = Vector2(342, 1)
+metadata/_edit_lock_ = true
 
 [node name="DropPoint5" type="Marker2D" parent="DropPoints"]
-position = Vector2(132, -1)
+position = Vector2(146, 0)
+metadata/_edit_lock_ = true

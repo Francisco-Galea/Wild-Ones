@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://brit8l38dpgai"]
+[gd_scene load_steps=5 format=3 uid="uid://brit8l38dpgai"]
 
 [ext_resource type="Texture2D" uid="uid://bo7jybrllxxl2" path="res://Weapons/Sprites/kameha.png" id="1_rap43"]
 [ext_resource type="Script" path="res://Weapons/Kameha/Kameha.gd" id="2_tngw7"]
+[ext_resource type="AudioStream" uid="uid://d1ja80dilgn2f" path="res://Weapons/Sounds/awp1.wav" id="3_p407h"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eqmqi"]
 radius = 16.0
@@ -24,4 +25,10 @@ position = Vector2(15, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_eqmqi")
 
+[node name="LaunchSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_p407h")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -10,4 +10,5 @@ func get_damage() -> int:
 func get_projectile_speed() -> float:
 	return 0.0
 
-
+func get_weapon_description() -> String:
+	return "Generic weapon"

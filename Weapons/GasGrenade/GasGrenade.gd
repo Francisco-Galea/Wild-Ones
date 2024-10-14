@@ -1,18 +1,25 @@
 extends RigidBody2D
 
 var explosion_damage: int
-var gas_duration: float = 10.0   
+var gas_duration: float = 15.0   
+var has_exploded = false
 @onready var explosion_timer = $NadeWaitTime
 @onready var explosion_area = $ExplosionArea
 @onready var damage_ticks_timer = $DamageTicksTimer
 @onready var particles = $ExplosionArea/GasParticles
+@onready var sound = $ExplosionSound
+@onready  var fire_in_the_hole = $throwGrenade
 
 func _ready():
 	explosion_timer.start()
-	particles.emitting = false
+	fire_in_the_hole.play()
 
 func explode():
+	if has_exploded:
+		return
+	has_exploded = true
 	particles.emitting = true
+	sound.play()
 	var bodies = explosion_area.get_overlapping_bodies()
 	for body in bodies:
 		if body.has_method("take_damage") and body != self:
@@ -21,6 +28,7 @@ func explode():
 			body.apply_gas_effect(gas_duration)
 	damage_ticks_timer.start()  
 	await get_tree().create_timer(gas_duration).timeout
+	particles.emitting = false
 	damage_ticks_timer.stop()  
 	queue_free()  
 
