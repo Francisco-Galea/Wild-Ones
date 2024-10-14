@@ -2,7 +2,6 @@ extends Node2D
 
 # Importante: El periodo de gracia cambiarlo a 10 segundos
 # Importante: El tiempo de turno cambiarlo a 20
-
 var player_scene: PackedScene = preload("res://Player/Player.tscn")
 var world_scene: PackedScene = preload("res://World/World.tscn")
 var player_count
@@ -14,6 +13,7 @@ var spawn_manager: SpawnManager
 @onready var grace_period_timer: Timer = $GracePeriodTimer
 var drop_manager_scene: PackedScene = preload("res://Director/DropManager/DropManager.tscn")  
 var drop_manager: Node2D  
+var is_paused: bool = false
 
 func _ready():
 	create_world()
@@ -69,5 +69,3 @@ func player_died(dead_player):
 	players.erase(dead_player)
 	if dead_player == players[current_player_index]:
 		end_turn()
-
-
