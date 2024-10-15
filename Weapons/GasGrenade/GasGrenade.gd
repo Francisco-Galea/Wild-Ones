@@ -43,3 +43,6 @@ func _on_damage_ticks_time_timeout():
 	for body in bodies:
 		if body.has_method("take_damage") and body != self:
 			body.take_damage(explosion_damage)  
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	queue_free()

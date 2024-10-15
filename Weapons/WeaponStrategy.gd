@@ -1,8 +1,6 @@
 extends Node
 class_name WeaponStrategy
 
-@onready  var texture = $Sprite2D
-
 func shoot(start_position: Vector2, direction: Vector2) -> Node2D:
 	return null
 
@@ -14,3 +12,4 @@ func get_projectile_speed() -> float:
 
 func get_weapon_description() -> String:
 	return "Generic weapon"
+

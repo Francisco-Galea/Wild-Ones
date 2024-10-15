@@ -11,3 +11,12 @@ func _on_Button2Players_pressed():
 
 func _on_Button3Players_pressed():
 	start_game(3)
+
+func _on_button_4_players_pressed():
+	start_game(4)
+
+func _on_button_back_pressed():
+	get_tree().change_scene_to_file("res://Menu/MainScene/MainScene.tscn")
+	queue_free()
+
+

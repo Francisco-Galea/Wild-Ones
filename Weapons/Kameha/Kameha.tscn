@@ -5,8 +5,8 @@
 [ext_resource type="AudioStream" uid="uid://d1ja80dilgn2f" path="res://Weapons/Sounds/awp1.wav" id="3_p407h"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eqmqi"]
-radius = 16.0
-height = 38.0
+radius = 18.0
+height = 56.0
 
 [node name="Kameha" type="RigidBody2D"]
 mass = 30.0
@@ -21,8 +21,7 @@ texture_filter = 1
 texture = ExtResource("1_rap43")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(15, 0)
-rotation = 1.5708
+position = Vector2(12, 0)
 shape = SubResource("CapsuleShape2D_eqmqi")
 
 [node name="LaunchSound" type="AudioStreamPlayer" parent="."]

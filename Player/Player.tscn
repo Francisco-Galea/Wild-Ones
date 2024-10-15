@@ -15,6 +15,7 @@ height = 50.0
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_mffje")
 metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -39,10 +40,11 @@ script = ExtResource("32_awdvc")
 metadata/_edit_lock_ = true
 
 [node name="Pivot" type="Marker2D" parent="."]
+position = Vector2(0, -15)
 metadata/_edit_lock_ = true
 
 [node name="projectile_spawn_point" type="Marker2D" parent="Pivot"]
-position = Vector2(57, 0)
+position = Vector2(46, 0)
 metadata/_edit_lock_ = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

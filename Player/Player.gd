@@ -7,7 +7,9 @@ var has_shot: bool = false
 var current_weapon: WeaponStrategy
 var weapons: Array = [
 	GrenadeStrategy.new(),
-	GasGrenadeStrategy.new()
+	GasGrenadeStrategy.new(),
+	KamehaStrategy.new(),
+	RasenganStrategy.new()
 ]
 #De armas solo debe quedar la granada
 @onready var health_component: Node = $Health
@@ -34,6 +36,11 @@ func set_turn(turn: bool):
 	is_turn = turn 
 	if turn:
 		has_shot = false
+	else:
+		stop_movement()
+
+func stop_movement():
+	velocity = Vector2.ZERO
 
 func handle_movement():
 	var input_direction = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")

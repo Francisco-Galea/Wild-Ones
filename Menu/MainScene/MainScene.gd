@@ -9,3 +9,4 @@ func _on_button_play_pressed():
 	var instance = menu_scene.instantiate()
 	get_tree().root.add_child(instance)
 	queue_free()  
+

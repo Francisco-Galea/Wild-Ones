@@ -13,7 +13,6 @@ var spawn_manager: SpawnManager
 @onready var grace_period_timer: Timer = $GracePeriodTimer
 var drop_manager_scene: PackedScene = preload("res://Director/DropManager/DropManager.tscn")  
 var drop_manager: Node2D  
-var is_paused: bool = false
 
 func _ready():
 	create_world()
