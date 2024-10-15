@@ -7,11 +7,11 @@ var has_shot: bool = false
 var current_weapon: WeaponStrategy
 var weapons: Array = [
 	GrenadeStrategy.new(),
-	
+	GasGrenadeStrategy.new()
 ]
 #De armas solo debe quedar la granada
 @onready var health_component: Node = $Health
-@onready var projectile_spawn_point: Marker2D = $projectile_spawn_point
+@onready var projectile_spawn_point: Marker2D = $Pivot/projectile_spawn_point
 
 func _ready():
 	gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -20,6 +20,7 @@ func _ready():
 	current_weapon = weapons[0]  
 
 func _physics_process(delta):
+	$Pivot.look_at(get_global_mouse_position())
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	else:

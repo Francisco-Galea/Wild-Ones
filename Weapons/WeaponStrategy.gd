@@ -1,6 +1,8 @@
 extends Node
 class_name WeaponStrategy
 
+@onready  var texture = $Sprite2D
+
 func shoot(start_position: Vector2, direction: Vector2) -> Node2D:
 	return null
 
