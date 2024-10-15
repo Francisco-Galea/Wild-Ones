@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Director/SpawnManager/SpawnManager.gd" id="3_dwlq3"]
 [ext_resource type="Texture2D" uid="uid://thqtchw48r8e" path="res://World/TileMap/sprite/Background_2.png" id="3_yqm17"]
 [ext_resource type="Script" path="res://Director/DropManager/DropManager.gd" id="5_gdohi"]
-[ext_resource type="AudioStream" uid="uid://kdqk86uaos6l" path="res://IdeasFuture/Sounds/musicMatch.wav" id="6_k7skk"]
+[ext_resource type="AudioStream" uid="uid://kdqk86uaos6l" path="res://World/Sounds/musicMatch.wav" id="6_k7skk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d3r2h"]
 texture = ExtResource("1_0o7eb")

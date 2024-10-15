@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b81cnq50w8gd3"]
 
 [ext_resource type="Script" path="res://Drops/WeaponBox.gd" id="1_3ajak"]
-[ext_resource type="Texture2D" uid="uid://cfncsqpwfee5o" path="res://IdeasFuture/Images/drop.png" id="1_vibee"]
+[ext_resource type="Texture2D" uid="uid://cfncsqpwfee5o" path="res://Drops/Sprite/drop.png" id="1_vibee"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uvdj0"]
 size = Vector2(5, 5.33333)
