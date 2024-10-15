@@ -11,10 +11,10 @@ func shoot(start_position: Vector2, direction: Vector2) -> Node2D:
 	return grenade
 
 func get_damage() -> int:
-	return 3
+	return 2
 
 func get_projectile_speed() -> float:
 	return 600.0  
 
 func get_weapon_description() -> String:
-	return "HUUUMOOOOS"
+	return "Granada de humo"

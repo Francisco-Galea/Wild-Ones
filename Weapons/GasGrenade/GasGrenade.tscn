@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dm610ud53sv8x"]
 
 [ext_resource type="Script" path="res://Weapons/GasGrenade/GasGrenade.gd" id="1_g138y"]
-[ext_resource type="Texture2D" uid="uid://cpqa6ao2er8qq" path="res://Weapons/Sprites/toxicSmoke.png" id="3_fm7vc"]
+[ext_resource type="Texture2D" uid="uid://cpqa6ao2er8qq" path="res://Weapons/Sprites/ToxicSmoke/toxicSmoke.png" id="2_72ny7"]
 [ext_resource type="AudioStream" uid="uid://cbum0nrnqqu8c" path="res://Weapons/Sounds/SmokeSound.wav" id="3_nr1n6"]
 [ext_resource type="AudioStream" uid="uid://ccy1lo7d1gave" path="res://Weapons/Sounds/ct_fireinhole.wav" id="4_axqm2"]
 
@@ -17,7 +17,7 @@ script = ExtResource("1_g138y")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(0.453125, 0.3035)
-texture = ExtResource("3_fm7vc")
+texture = ExtResource("2_72ny7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -1.5)

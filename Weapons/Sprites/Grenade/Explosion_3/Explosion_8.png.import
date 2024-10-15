@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccfmspxbnjgh0"
-path="res://.godot/imported/rasenganAttept.png-cb8787de8dd238685f2279580eb0bc56.ctex"
+uid="uid://kd6dfqpyomi"
+path="res://.godot/imported/Explosion_8.png-e4a46485ad12905b7a638ee297b942c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Weapons/Sprites/rasenganAttept.png"
-dest_files=["res://.godot/imported/rasenganAttept.png-cb8787de8dd238685f2279580eb0bc56.ctex"]
+source_file="res://Weapons/Sprites/Grenade/Explosion_3/Explosion_8.png"
+dest_files=["res://.godot/imported/Explosion_8.png-e4a46485ad12905b7a638ee297b942c9.ctex"]
 
 [params]
 

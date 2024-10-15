@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://brit8l38dpgai"]
 
-[ext_resource type="Texture2D" uid="uid://bo7jybrllxxl2" path="res://Weapons/Sprites/kameha.png" id="1_rap43"]
+[ext_resource type="Texture2D" uid="uid://bo7jybrllxxl2" path="res://Weapons/Sprites/Kameha/kameha.png" id="2_p6eoi"]
 [ext_resource type="Script" path="res://Weapons/Kameha/Kameha.gd" id="2_tngw7"]
 [ext_resource type="AudioStream" uid="uid://d1ja80dilgn2f" path="res://Weapons/Sounds/awp1.wav" id="3_p407h"]
 
@@ -18,7 +18,7 @@ metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("1_rap43")
+texture = ExtResource("2_p6eoi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(12, 0)

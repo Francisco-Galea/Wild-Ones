@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dv4mv2f1noy74"
-path="res://.godot/imported/Explosion_1.png-a029ca02558244fa166421b2a9155c9d.ctex"
+uid="uid://cpqa6ao2er8qq"
+path="res://.godot/imported/toxicSmoke.png-0e789a6cd4935817ef2fc184031e0dad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Weapons/Sprites/Explosion_3/Explosion_1.png"
-dest_files=["res://.godot/imported/Explosion_1.png-a029ca02558244fa166421b2a9155c9d.ctex"]
+source_file="res://Weapons/Sprites/ToxicSmoke/toxicSmoke.png"
+dest_files=["res://.godot/imported/toxicSmoke.png-0e789a6cd4935817ef2fc184031e0dad.ctex"]
 
 [params]
 

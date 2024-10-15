@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bh3v8xlrjp708"]
 
-[ext_resource type="Texture2D" uid="uid://dn2mx83clqkr" path="res://Weapons/Sprites/sableLaser.png" id="1_0ajhs"]
+[ext_resource type="Texture2D" uid="uid://dn2mx83clqkr" path="res://IdeasFuture/Images/sableLaser.png" id="1_0ajhs"]
 [ext_resource type="Script" path="res://Weapons/Lightsaber/Lightsaber.gd" id="1_fuefv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xtrsd"]

@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://ctunpgd1hdl75"]
+
+[ext_resource type="Script" path="res://Weapons/TripMine/TripMine.gd" id="1_0xxvq"]
+[ext_resource type="Texture2D" uid="uid://cb04aohqp1cid" path="res://IdeasFuture/Images/TripMine.png" id="1_7p6gu"]
+[ext_resource type="AudioStream" uid="uid://ct0wl8ipttufi" path="res://Weapons/Sounds/landMineSound.wav" id="3_xs5d6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h70jd"]
+size = Vector2(34, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_euv7f"]
+size = Vector2(38, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h4p42"]
+radius = 85.0059
+
+[node name="TripMine" type="RigidBody2D"]
+script = ExtResource("1_0xxvq")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_7p6gu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -4)
+shape = SubResource("RectangleShape2D_h70jd")
+
+[node name="ActivationArea" type="Area2D" parent="."]
+
+[node name="ActivationShape" type="CollisionShape2D" parent="ActivationArea"]
+position = Vector2(1, -4)
+shape = SubResource("RectangleShape2D_euv7f")
+
+[node name="ExplosionArea" type="Area2D" parent="."]
+
+[node name="ExplosionShape" type="CollisionShape2D" parent="ExplosionArea"]
+shape = SubResource("CircleShape2D_h4p42")
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_xs5d6")
+
+[node name="ActivationTime" type="Timer" parent="."]
+
+[connection signal="body_entered" from="ActivationArea" to="." method="_on_activation_area_body_entered"]

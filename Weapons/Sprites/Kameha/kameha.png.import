@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwjk8gf2ko5ng"
-path="res://.godot/imported/Explosion_5.png-593f7143a6ee1915f3ea3244558b0dde.ctex"
+uid="uid://bo7jybrllxxl2"
+path="res://.godot/imported/kameha.png-a9e1dfc2acfbf9794bf6c9eff25288fd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Weapons/Sprites/Explosion_3/Explosion_5.png"
-dest_files=["res://.godot/imported/Explosion_5.png-593f7143a6ee1915f3ea3244558b0dde.ctex"]
+source_file="res://Weapons/Sprites/Kameha/kameha.png"
+dest_files=["res://.godot/imported/kameha.png-a9e1dfc2acfbf9794bf6c9eff25288fd.ctex"]
 
 [params]
 
