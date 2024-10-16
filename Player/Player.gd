@@ -13,6 +13,7 @@ var weapons: Array = [
 #De armas solo debe quedar la granada
 @onready var health_component: Node = $Health
 @onready var projectile_spawn_point: Marker2D = $Pivot/projectile_spawn_point
+@onready var deathSound = $DeathSound
 
 func _ready():
 	gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -83,8 +84,11 @@ func take_damage(amount: int):
 		_on_died()
 
 func _on_died():
+	deathSound.play()
 	print(name + " ha muerto!")
+	hide()
 	set_physics_process(false)
+	await deathSound.finished
 	queue_free()
 	get_parent().player_died(self)
 	

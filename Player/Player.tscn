@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://disnaaj1p5qmd"]
+[gd_scene load_steps=7 format=3 uid="uid://disnaaj1p5qmd"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_mffje"]
 [ext_resource type="Texture2D" uid="uid://co41eifbg2ue7" path="res://Player/Sprite/Sprite-0005.png" id="2_biaib"]
+[ext_resource type="AudioStream" uid="uid://bxdm2jqisqnyg" path="res://Player/Sounds/metalGearDeadScream.wav" id="4_c38la"]
 [ext_resource type="Script" path="res://Player/Health.gd" id="32_awdvc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u3t4n"]
@@ -46,5 +47,8 @@ metadata/_edit_lock_ = true
 [node name="projectile_spawn_point" type="Marker2D" parent="Pivot"]
 position = Vector2(46, 0)
 metadata/_edit_lock_ = true
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_c38la")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
