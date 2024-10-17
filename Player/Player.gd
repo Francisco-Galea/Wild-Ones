@@ -8,7 +8,7 @@ var current_weapon: WeaponStrategy
 var weapons: Array = [
 	GrenadeStrategy.new(),
 	GasGrenadeStrategy.new(),
-	TripMineStrategy.new()
+	TripMineStrategy.new(),
 ]
 #De armas solo debe quedar la granada
 @onready var health_component: Node = $Health

@@ -1,7 +1,5 @@
 extends Node2D
 
-# Importante: El periodo de gracia cambiarlo a 10 segundos
-# Importante: El tiempo de turno cambiarlo a 20
 var player_scene: PackedScene = preload("res://Player/Player.tscn")
 var world_scene: PackedScene = preload("res://World/World.tscn")
 var player_count
