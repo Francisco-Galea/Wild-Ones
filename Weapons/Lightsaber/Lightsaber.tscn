@@ -15,6 +15,8 @@ texture_filter = 1
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_0ajhs")
 
+[node name="SwingAnimation" type="AnimationPlayer" parent="Sprite2D"]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8.5)
 shape = SubResource("RectangleShape2D_xtrsd")

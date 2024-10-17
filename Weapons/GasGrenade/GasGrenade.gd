@@ -15,6 +15,7 @@ func _ready():
 	fire_in_the_hole.play()
 
 func explode():
+	print("Estoy en Gasgrenade.gd")
 	if has_exploded:
 		return
 	has_exploded = true

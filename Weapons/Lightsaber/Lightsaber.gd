@@ -1,17 +1,13 @@
 extends Area2D
 
 var cut_damage: int 
-var attack_range: float = 30.0  
 
-func attack():
-	var bodies = get_overlapping_bodies() 
-	for body in bodies:
-		if body.has_method("take_damage"):
-			body.take_damage(cut_damage)
 
 func _on_body_entered(body):
+	print("Estoy dentro de sable laser")
 	if body.has_method("take_damage"):
 		body.take_damage(cut_damage)
+	queue_free()
 
 func set_damage(damage: int):
 	cut_damage = damage
