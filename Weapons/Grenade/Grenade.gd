@@ -4,7 +4,7 @@ var explosion_damage: int
 var destruction_radius: int = 1
 @onready var explosion_sound = $explosion
 @onready  var fire_in_the_hole = $throwGrenade
-@onready var explosion_animation = $Sprite2D/AnimationPlayer
+@onready var explosion_particles = $Area2D/GPUParticles2D
 
 func _ready():
 	$Timer.start()
@@ -15,7 +15,7 @@ func _on_timer_timeout():
 
 func explode():
 	print("Estoy en grenade.gd")
-	explosion_animation.play("explosion")
+	explosion_particles.emitting = true
 	explosion_sound.play()
 	var explosion_area = $Area2D
 	var bodies = explosion_area.get_overlapping_bodies()
@@ -24,7 +24,7 @@ func explode():
 			body.take_damage(explosion_damage)
 		if body is TileMap:
 			destroy_terrain(body, global_position)
-	await explosion_animation.animation_finished
+	explosion_particles.emitting = false
 	await explosion_sound.finished
 	queue_free()
 

@@ -11,7 +11,6 @@ func _on_activation_area_body_entered(body):
 
 func explode():
 	print("Estoy en TripMine.gd")
-	var explosion_area = $ExplosionArea
 	explosion_sound.play()
 	var bodies = explosion_area.get_overlapping_bodies()
 	for body in bodies:

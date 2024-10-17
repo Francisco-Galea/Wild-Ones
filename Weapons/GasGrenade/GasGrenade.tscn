@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dm610ud53sv8x"]
+[gd_scene load_steps=8 format=3 uid="uid://dm610ud53sv8x"]
 
 [ext_resource type="Script" path="res://Weapons/GasGrenade/GasGrenade.gd" id="1_g138y"]
 [ext_resource type="Texture2D" uid="uid://cpqa6ao2er8qq" path="res://Weapons/Sprites/ToxicSmoke/toxicSmoke.png" id="2_72ny7"]
@@ -10,6 +10,20 @@ size = Vector2(8, 13)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ppl30"]
 radius = 125.1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5h6xf"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 0.01
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 200.0
+initial_velocity_max = 250.0
+gravity = Vector3(0, 0, 0)
+damping_min = 200.0
+damping_max = 400.0
+scale_min = 2.0
+scale_max = 4.0
 
 [node name="GasGrenade" type="RigidBody2D"]
 script = ExtResource("1_g138y")
@@ -29,18 +43,13 @@ shape = SubResource("RectangleShape2D_51mkc")
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_ppl30")
 
-[node name="GasParticles" type="CPUParticles2D" parent="ExplosionArea"]
+[node name="GasParticles" type="GPUParticles2D" parent="ExplosionArea"]
 emitting = false
-amount = 5000
-lifetime = 12.0
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_5h6xf")
+lifetime = 18.0
 one_shot = true
-emission_shape = 2
-emission_sphere_radius = 100.0
-spread = 180.0
-gravity = Vector2(0, -1)
-initial_velocity_min = 20.0
-initial_velocity_max = 20.0
-color = Color(0, 0.247059, 0.0196078, 1)
+speed_scale = 2.0
 
 [node name="NadeWaitTime" type="Timer" parent="."]
 wait_time = 2.0
