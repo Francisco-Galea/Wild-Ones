@@ -3,9 +3,6 @@ extends Area2D
 var cut_damage: int 
 var attack_range: float = 30.0  
 
-func _ready():
-	pass
-
 func attack():
 	var bodies = get_overlapping_bodies() 
 	for body in bodies:
