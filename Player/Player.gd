@@ -9,7 +9,6 @@ var weapons: Array = [
 	GrenadeStrategy.new(),
 	GasGrenadeStrategy.new(),
 	TripMineStrategy.new(),
-	LightsaberStrategy.new()
 ]
 #De armas solo debe quedar la granada
 @onready var health_component: Node = $Health
