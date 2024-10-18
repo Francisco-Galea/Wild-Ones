@@ -27,7 +27,7 @@ func create_players():
 	spawn_manager.reset_available_spawn_points()
 	for i in range(player_count):
 		var player_instance = player_scene.instantiate()
-		player_instance.name = "Player" + str(i + 1)
+		player_instance.name = "Player" + str(i + 1)  
 		player_instance.position = spawn_manager.get_random_spawn_point()
 		add_child(player_instance)
 		players.append(player_instance)

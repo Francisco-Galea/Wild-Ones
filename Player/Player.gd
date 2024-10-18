@@ -14,12 +14,14 @@ var weapons: Array = [
 @onready var health_component: Node = $Health
 @onready var projectile_spawn_point: Marker2D = $Pivot/projectile_spawn_point
 @onready var deathSound = $DeathSound
+@onready var player_name_label: Label = $PlayerName
 
 func _ready():
 	gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 	set_physics_process(true)
 	add_to_group("Players")
 	current_weapon = weapons[0]  
+	player_name_label.text = name
 
 func _physics_process(delta):
 	$Pivot.look_at(get_global_mouse_position())
