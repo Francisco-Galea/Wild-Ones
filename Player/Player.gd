@@ -4,17 +4,18 @@ var velocidad: int = 200
 var gravity: float
 var is_turn: bool = false
 var has_shot: bool = false
+var current_weapon_index: int = 0
 var current_weapon: WeaponStrategy
 var weapons: Array = [
 	GrenadeStrategy.new(),
-	GasGrenadeStrategy.new(),
-	TripMineStrategy.new(),
+	GasGrenadeStrategy.new()
 ]
 #De armas solo debe quedar la granada
 @onready var health_component: Node = $Health
 @onready var projectile_spawn_point: Marker2D = $Pivot/projectile_spawn_point
 @onready var deathSound = $DeathSound
 @onready var player_name_label: Label = $PlayerName
+@onready var weapons_hud: Control = $WeaponsHud
 
 func _ready():
 	gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -22,6 +23,10 @@ func _ready():
 	add_to_group("Players")
 	current_weapon = weapons[0]  
 	player_name_label.text = name
+	update_weapons_hud()
+
+func update_weapons_hud():
+	weapons_hud.update_hud(current_weapon)
 
 func _physics_process(delta):
 	$Pivot.look_at(get_global_mouse_position())
@@ -55,18 +60,13 @@ func handle_movement():
 		get_parent().end_turn()
 
 func handle_weapon_switch():
-	if Input.is_action_just_pressed("switch_weapon_1"):
-		current_weapon = weapons[0]
+	if Input.is_action_just_pressed("switch_weapon_next"):
+		current_weapon_index += 1
+		if current_weapon_index >= weapons.size():
+			current_weapon_index = 0 
+		current_weapon = weapons[current_weapon_index]
 		print("Switched to " + current_weapon.get_weapon_description())
-	elif Input.is_action_just_pressed("switch_weapon_2") and weapons.size() > 1:
-		current_weapon = weapons[1]
-		print("Switched to " + current_weapon.get_weapon_description())
-	elif Input.is_action_just_pressed("switch_weapon_3") and weapons.size() > 2:
-		current_weapon = weapons[2]
-		print("Switched to " + current_weapon.get_weapon_description())
-	elif Input.is_action_just_pressed("switch_weapon_4") and weapons.size() > 3:
-		current_weapon = weapons[3]
-		print("Switched to " + current_weapon.get_weapon_description())
+		update_weapons_hud()
 
 func collect_weapon(weapon_strategy):
 	weapons.append(weapon_strategy)
@@ -94,4 +94,16 @@ func _on_died():
 	queue_free()
 	get_parent().player_died(self)
 	
+func add_ammo_to_weapon(weapon_strategy, amount):
+	for weapon in weapons:
+		if weapon.get_class() == weapon_strategy.get_class():
+			weapon.ammo += amount
+			print(name + " ha recibido " + str(amount) + " municiones para " + weapon_strategy.get_weapon_description() + ". Munición actual: " + str(weapon.ammo))
+
+func get_available_weapons() -> Array:
+	var available_weapons = []
+	for weapon in weapons:
+		available_weapons.append(weapon)  # Agrega todas las armas que el jugador tiene
+	return available_weapons
+
 

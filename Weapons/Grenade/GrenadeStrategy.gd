@@ -19,3 +19,5 @@ func get_projectile_speed() -> float:
 
 func get_weapon_description() -> String:
 	return "Granada explosiva"
+
+

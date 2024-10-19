@@ -12,7 +12,7 @@ func _ready():
 	drop_timer = Timer.new()
 	add_child(drop_timer)
 	drop_timer.connect("timeout", Callable(self, "_on_drop_timer_timeout"))
-	drop_timer.set_wait_time(30)  #Despues cambiar a 20, en 5 está para probar
+	drop_timer.set_wait_time(10)  #Despues cambiar a 20
 	drop_timer.set_one_shot(false)
 	drop_timer.start()
 
