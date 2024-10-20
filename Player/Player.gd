@@ -6,8 +6,10 @@ extends CharacterBody2D
 @onready var player_name_label: Label = $PlayerName
 @onready var weapons_hud: Control = $WeaponsHud
 
+var player_name: String
 var velocidad: int = 200
 var gravity: float
+var is_dead: bool = false
 var is_turn: bool = false
 var has_shot: bool = false
 var current_weapon_index: int = 0
@@ -24,6 +26,7 @@ func _ready():
 	add_to_group("Players")
 	set_current_weapon(0)
 	player_name_label.text = name
+	player_name = name
 
 func _physics_process(delta):
 	$Pivot.look_at(get_global_mouse_position())
@@ -106,4 +109,3 @@ func get_available_weapons() -> Array:
 		available_weapons.append(weapon) 
 	available_weapons.erase(GrenadeStrategy)
 	return available_weapons
-
