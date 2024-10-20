@@ -28,7 +28,6 @@ func _on_drop_timer_timeout():
 
 func spawn_weapon_box():
 	if drop_points.is_empty():
-		push_warning("No drop points available for spawning!")
 		return
 	var random_point = drop_points[randi() % drop_points.size()]
 	var weapon_box = weapon_box_scene.instantiate()

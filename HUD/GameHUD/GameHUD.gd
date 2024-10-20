@@ -9,5 +9,5 @@ func _ready():
 	turn_time_label = $VBoxContainer/lblTurnTime
 
 func update_hud(player_name: String, turn_time: float):
-	player_name_label.text = player_name
-	turn_time_label.text = "Tiempo restante: " + str(turn_time) + "s"
+	player_name_label.text = "Turno de: " + player_name
+	turn_time_label.text = "Tiempo restante: " + str(int(turn_time)) + "s"
