@@ -5,19 +5,27 @@ extends Node2D
 @export var drop_manager_scene: PackedScene = preload("res://Director/DropManager/DropManager.tscn")
 @onready var turn_timer: Timer = $TurnTimer
 @onready var grace_period_timer: Timer = $GracePeriodTimer
-
+@export var game_hud_scene: PackedScene = preload("res://HUD/GameHUD/GameHUD.tscn")
 var player_count: int
 var players: Array[CharacterBody2D] = []
 var current_player_index: int = 0
 var world_instance: Node
 var spawn_manager: SpawnManager
 var drop_manager: Node2D  
+var game_hud: GameHud
 
 func _ready():
 	create_world()
 	create_players()
 	initialize_turn_system()
 	setup_drop_manager()
+	setup_game_hud()
+
+func setup_game_hud():
+	game_hud = game_hud_scene.instantiate()
+	add_child(game_hud)
+	print("Game HUD instanciado:", game_hud) 
+	game_hud.update_hud(players[current_player_index].name, turn_timer.wait_time)
 
 func setup_drop_manager():
 	drop_manager = drop_manager_scene.instantiate()
@@ -52,10 +60,16 @@ func start_turn():
 		current_player_index = (current_player_index + 1) % players.size()
 	if current_player_index < players.size() and !players[current_player_index].is_dead:
 		print("Periodo de gracia antes del turno de " + players[current_player_index].name)
-		grace_period_timer.start()  
+		grace_period_timer.start()
 		set_players_turn_controls(false)
+		if game_hud == null:
+			print("ERROR: game_hud es nil cuando se intenta actualizar el HUD")
+		else:
+			print("Actualizando HUD: Jugador -", players[current_player_index].name)
+			game_hud.update_hud(players[current_player_index].name, turn_timer.wait_time)
 	else:
-		end_turn()  
+		end_turn()
+
 
 func set_players_turn_controls(enable: bool):
 	for player in players:
@@ -96,3 +110,9 @@ func check_next_player():
 	while current_player_index < players.size() and players[current_player_index].is_dead:
 		current_player_index = (current_player_index + 1) % players.size()
 	start_turn()
+
+func _process(delta: float):
+	if turn_timer.is_stopped():
+		return
+	var time_remaining = turn_timer.time_left
+	game_hud.update_hud(players[current_player_index].name, time_remaining)

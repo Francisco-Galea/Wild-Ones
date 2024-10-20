@@ -1,13 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://batplbsn1if7m"]
+[gd_scene load_steps=2 format=3 uid="uid://batplbsn1if7m"]
 
-[ext_resource type="PackedScene" uid="uid://d0jcrnferdj6k" path="res://HUD/TurnsHUD/TurnHUD.tscn" id="1_7lnpg"]
 [ext_resource type="Script" path="res://HUD/GameHUD/GameHUD.gd" id="1_qnvdo"]
-[ext_resource type="PackedScene" uid="uid://dtybpihlwgpxy" path="res://HUD/WeaponsHUD/WeaponsHUD.tscn" id="2_tj2a6"]
 
 [node name="GameHud" type="CanvasLayer"]
 script = ExtResource("1_qnvdo")
 metadata/_edit_group_ = true
 
-[node name="MatchHud" parent="." instance=ExtResource("1_7lnpg")]
+[node name="lblPlayerName" type="Label" parent="."]
+offset_left = 589.5
+offset_right = 590.5
+offset_bottom = 23.0
 
-[node name="WeaponsHud" parent="." instance=ExtResource("2_tj2a6")]
+[node name="lblTurnTime" type="Label" parent="."]
+offset_left = 643.5
+offset_top = 27.0
+offset_right = 644.5
+offset_bottom = 50.0

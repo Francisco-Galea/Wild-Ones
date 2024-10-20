@@ -1,11 +1,13 @@
 extends CanvasLayer
+class_name GameHud
 
+var player_name_label: Label 
+var turn_time_label: Label  
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	player_name_label = $lblPlayerName  
+	turn_time_label = $lblTurnTime  
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func update_hud(player_name: String, turn_time: float):
+	player_name_label.text = player_name
+	turn_time_label.text = "Tiempo restante: " + str(turn_time) + "s"
