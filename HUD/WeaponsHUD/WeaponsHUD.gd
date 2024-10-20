@@ -1,8 +1,9 @@
 extends Control
 
-@onready var lbl_weapon = $VBoxContainer/lblWeapon
-@onready var lbl_ammo = $VBoxContainer/lblAmmo
+@onready var lblWeapon = $VBoxContainer/lblWeapon
+@onready var lblAmmo = $VBoxContainer/lblAmmo
 
-func update_hud(weapon: WeaponStrategy):
-	lbl_weapon.text = weapon.get_weapon_description()
-	lbl_ammo.text = str(weapon.ammo)
+func update_weapon_info(weapon: WeaponStrategy):
+	lblWeapon.text = weapon.get_weapon_description()
+	lblAmmo.text = str(weapon.ammo)
+

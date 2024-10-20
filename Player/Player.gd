@@ -1,5 +1,11 @@
 extends CharacterBody2D
 
+@onready var health_component: Node = $Health
+@onready var projectile_spawn_point: Marker2D = $Pivot/projectile_spawn_point
+@onready var deathSound = $DeathSound
+@onready var player_name_label: Label = $PlayerName
+@onready var weapons_hud: Control = $WeaponsHud
+
 var velocidad: int = 200
 var gravity: float
 var is_turn: bool = false
@@ -10,30 +16,17 @@ var weapons: Array = [
 	GrenadeStrategy.new(),
 	GasGrenadeStrategy.new()
 ]
-#De armas solo debe quedar la granada
-@onready var health_component: Node = $Health
-@onready var projectile_spawn_point: Marker2D = $Pivot/projectile_spawn_point
-@onready var deathSound = $DeathSound
-@onready var player_name_label: Label = $PlayerName
-@onready var weapons_hud: Control = $WeaponsHud
 
 func _ready():
 	gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 	set_physics_process(true)
 	add_to_group("Players")
-	current_weapon = weapons[0]  
+	set_current_weapon(0)
 	player_name_label.text = name
-	update_weapons_hud()
-
-func update_weapons_hud():
-	weapons_hud.update_hud(current_weapon)
 
 func _physics_process(delta):
 	$Pivot.look_at(get_global_mouse_position())
-	if not is_on_floor():
-		velocity.y += gravity * delta
-	else:
-		velocity.y = 0
+	handle_gravity(delta)
 	if is_turn:
 		handle_movement()
 		handle_weapon_switch()
@@ -49,6 +42,12 @@ func set_turn(turn: bool):
 func stop_movement():
 	velocity = Vector2.ZERO
 
+func handle_gravity(delta: float):
+	if not is_on_floor():
+		velocity.y += gravity * delta
+	else:
+		velocity.y = 0
+
 func handle_movement():
 	var input_direction = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	velocity.x = input_direction * velocidad
@@ -61,16 +60,16 @@ func handle_movement():
 
 func handle_weapon_switch():
 	if Input.is_action_just_pressed("switch_weapon_next"):
-		current_weapon_index += 1
-		if current_weapon_index >= weapons.size():
-			current_weapon_index = 0 
-		current_weapon = weapons[current_weapon_index]
-		print("Switched to " + current_weapon.get_weapon_description())
-		update_weapons_hud()
+		current_weapon_index = (current_weapon_index + 1) % weapons.size()
+		set_current_weapon(current_weapon_index)
 
-func collect_weapon(weapon_strategy):
+func set_current_weapon(index: int):
+	current_weapon = weapons[index]
+	print("Switched to " + current_weapon.get_weapon_description())
+
+func collect_weapon(weapon_strategy: WeaponStrategy):
 	weapons.append(weapon_strategy)
-	current_weapon = weapon_strategy
+	set_current_weapon(weapons.size() - 1)  
 	print(name + " collected " + weapon_strategy.get_weapon_description())
 
 func shoot_projectile():
@@ -93,8 +92,8 @@ func _on_died():
 	await deathSound.finished
 	queue_free()
 	get_parent().player_died(self)
-	
-func add_ammo_to_weapon(weapon_strategy, amount):
+
+func add_ammo_to_weapon(weapon_strategy: WeaponStrategy, amount: int):
 	for weapon in weapons:
 		if weapon.get_class() == weapon_strategy.get_class():
 			weapon.ammo += amount
@@ -103,7 +102,7 @@ func add_ammo_to_weapon(weapon_strategy, amount):
 func get_available_weapons() -> Array:
 	var available_weapons = []
 	for weapon in weapons:
-		available_weapons.append(weapon)  # Agrega todas las armas que el jugador tiene
+		available_weapons.append(weapon) 
+	available_weapons.erase(GrenadeStrategy)
 	return available_weapons
-
 

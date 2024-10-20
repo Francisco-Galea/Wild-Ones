@@ -1,29 +1,26 @@
 [gd_scene load_steps=2 format=3 uid="uid://dtybpihlwgpxy"]
 
-[ext_resource type="Script" path="res://HUD/WeaponsHUD/WeaponsHUD.gd" id="1_bja6u"]
+[ext_resource type="Script" path="res://HUD/WeaponsHUD/WeaponsHUD.gd" id="1_fsgy1"]
 
 [node name="WeaponsHud" type="Control"]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 3
 anchors_preset = 9
 anchor_bottom = 1.0
 grow_vertical = 2
-script = ExtResource("1_bja6u")
+script = ExtResource("1_fsgy1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -50.0
-offset_right = 40.0
-grow_vertical = 0
+offset_right = 77.0
+offset_bottom = 50.0
 
 [node name="lblWeapon" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "
+text = "Arma:
 "
 
 [node name="lblAmmo" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "TANGA
+text = "Municion:
 "

@@ -15,8 +15,5 @@ func get_projectile_speed() -> float:
 func get_weapon_description() -> String:
 	return "Generic weapon"
 
-func get_weapon_sprite() -> Sprite2D:
-	return null
-
 func has_ammo() -> bool:
 	return ammo > 0

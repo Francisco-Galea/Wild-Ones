@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://thqtchw48r8e" path="res://World/TileMap/sprite/Background_2.png" id="3_yqm17"]
 [ext_resource type="Script" path="res://Director/DropManager/DropManager.gd" id="5_gdohi"]
 [ext_resource type="AudioStream" uid="uid://kdqk86uaos6l" path="res://World/Sounds/musicMatch.wav" id="6_k7skk"]
-[ext_resource type="PackedScene" uid="uid://dtybpihlwgpxy" path="res://HUD/WeaponsHUD/WeaponsHUD.tscn" id="7_ysajb"]
+[ext_resource type="PackedScene" uid="uid://batplbsn1if7m" path="res://HUD/GameHUD/GameHUD.tscn" id="7_4kj4t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d3r2h"]
 texture = ExtResource("1_0o7eb")
@@ -1068,6 +1068,8 @@ sources/0 = SubResource("TileSetAtlasSource_d3r2h")
 [node name="World" type="Node2D"]
 metadata/_edit_lock_ = true
 
+[node name="GameHud" parent="." instance=ExtResource("7_4kj4t")]
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_wxcro")
 format = 2
@@ -1138,9 +1140,3 @@ metadata/_edit_lock_ = true
 stream = ExtResource("6_k7skk")
 volume_db = -20.0
 autoplay = true
-
-[node name="WeaponsHud" parent="." instance=ExtResource("7_ysajb")]
-offset_left = 499.0
-offset_top = 192.0
-offset_right = 499.0
-offset_bottom = 192.0

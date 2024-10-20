@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://batplbsn1if7m"]
+
+[ext_resource type="PackedScene" uid="uid://d0jcrnferdj6k" path="res://HUD/TurnsHUD/TurnHUD.tscn" id="1_7lnpg"]
+[ext_resource type="PackedScene" uid="uid://dtybpihlwgpxy" path="res://HUD/WeaponsHUD/WeaponsHUD.tscn" id="2_tj2a6"]
+
+[node name="GameHud" type="CanvasLayer"]
+metadata/_edit_group_ = true
+
+[node name="MatchHud" parent="." instance=ExtResource("1_7lnpg")]
+
+[node name="WeaponsHud" parent="." instance=ExtResource("2_tj2a6")]

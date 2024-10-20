@@ -15,5 +15,5 @@ func take_damage(amount: int):
 	if current_health == 0:
 		emit_signal("died")
 
-func get_health():
+func get_health() -> int:
 	return current_health
