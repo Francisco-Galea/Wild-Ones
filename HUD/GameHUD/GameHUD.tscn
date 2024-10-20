@@ -20,3 +20,14 @@ layout_mode = 2
 
 [node name="lblTurnTime" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+
+[node name="VBoxContainerWeapon" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="lblWeaponSelected" type="Label" parent="VBoxContainerWeapon"]
+layout_mode = 2
+text = "Arma seleccionada:"
+
+[node name="lblWeaponName" type="Label" parent="VBoxContainerWeapon"]
+layout_mode = 2
