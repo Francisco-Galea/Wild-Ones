@@ -6,13 +6,17 @@
 script = ExtResource("1_qnvdo")
 metadata/_edit_group_ = true
 
-[node name="lblPlayerName" type="Label" parent="."]
-offset_left = 589.5
-offset_right = 590.5
-offset_bottom = 23.0
-
-[node name="lblTurnTime" type="Label" parent="."]
-offset_left = 643.5
-offset_top = 27.0
-offset_right = 644.5
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
 offset_bottom = 50.0
+grow_horizontal = 2
+
+[node name="lblPlayerName" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="lblTurnTime" type="Label" parent="VBoxContainer"]
+layout_mode = 2

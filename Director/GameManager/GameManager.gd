@@ -3,9 +3,10 @@ extends Node2D
 @export var player_scene: PackedScene = preload("res://Player/Player.tscn")
 @export var world_scene: PackedScene = preload("res://World/World.tscn")
 @export var drop_manager_scene: PackedScene = preload("res://Director/DropManager/DropManager.tscn")
+@export var game_hud_scene: PackedScene = preload("res://HUD/GameHUD/GameHUD.tscn")
 @onready var turn_timer: Timer = $TurnTimer
 @onready var grace_period_timer: Timer = $GracePeriodTimer
-@export var game_hud_scene: PackedScene = preload("res://HUD/GameHUD/GameHUD.tscn")
+@onready var turn_transition_timer: Timer = $TurnTransitionTimer
 var player_count: int
 var players: Array[CharacterBody2D] = []
 var current_player_index: int = 0
@@ -24,7 +25,6 @@ func _ready():
 func setup_game_hud():
 	game_hud = game_hud_scene.instantiate()
 	add_child(game_hud)
-	print("Game HUD instanciado:", game_hud) 
 	game_hud.update_hud(players[current_player_index].name, turn_timer.wait_time)
 
 func setup_drop_manager():
@@ -56,31 +56,34 @@ func start_turn():
 	if players.size() <= 1:
 		end_game()
 		return
+	stop_all_timers()
 	while current_player_index < players.size() and players[current_player_index].is_dead:
 		current_player_index = (current_player_index + 1) % players.size()
 	if current_player_index < players.size() and !players[current_player_index].is_dead:
-		print("Periodo de gracia antes del turno de " + players[current_player_index].name)
-		grace_period_timer.start()
-		set_players_turn_controls(false)
-		if game_hud == null:
-			print("ERROR: game_hud es nil cuando se intenta actualizar el HUD")
-		else:
-			print("Actualizando HUD: Jugador -", players[current_player_index].name)
-			game_hud.update_hud(players[current_player_index].name, turn_timer.wait_time)
+		print("Iniciando transición antes del turno de " + players[current_player_index].name)
+		turn_transition_timer.start() 
+		set_players_turn_controls(false) 
 	else:
 		end_turn()
 
+func stop_all_timers():
+	if turn_timer.is_stopped() == false:
+		turn_timer.stop()
+	if grace_period_timer.is_stopped() == false:
+		grace_period_timer.stop()
+	if turn_transition_timer.is_stopped() == false:
+		turn_transition_timer.stop()
 
 func set_players_turn_controls(enable: bool):
 	for player in players:
 		player.set_turn(enable and player == players[current_player_index])
 
 func end_turn():
-	turn_timer.stop()
+	stop_all_timers()
 	if current_player_index < players.size():
 		players[current_player_index].set_turn(false)
 	current_player_index = (current_player_index + 1) % players.size()
-	start_turn()  
+	turn_transition_timer.start()
 
 func _on_turn_timer_timeout():
 	end_turn()
@@ -97,6 +100,7 @@ func player_died(dead_player):
 	dead_player.is_dead = true  
 	print(dead_player.name + " ha sido eliminado!")
 	players.erase(dead_player)
+	
 	if players.size() <= 1:
 		end_game()
 	else:
@@ -116,3 +120,9 @@ func _process(delta: float):
 		return
 	var time_remaining = turn_timer.time_left
 	game_hud.update_hud(players[current_player_index].name, time_remaining)
+
+func _on_turn_transition_timer_timeout():
+	print("Periodo de gracia antes del turno de " + players[current_player_index].name)
+	grace_period_timer.start()
+	game_hud.update_hud(players[current_player_index].name, turn_timer.wait_time)
+

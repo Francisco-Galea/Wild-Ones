@@ -13,5 +13,10 @@ one_shot = true
 wait_time = 5.0
 one_shot = true
 
+[node name="TurnTransitionTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
 [connection signal="timeout" from="TurnTimer" to="." method="_on_turn_timer_timeout"]
 [connection signal="timeout" from="GracePeriodTimer" to="." method="_on_grace_period_timer_timeout"]
+[connection signal="timeout" from="TurnTransitionTimer" to="." method="_on_turn_transition_timer_timeout"]
