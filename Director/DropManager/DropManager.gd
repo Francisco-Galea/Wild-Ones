@@ -35,6 +35,3 @@ func spawn_weapon_box():
 	weapon_box.position = random_point.position
 	weapon_box.connect("weapon_collected", Callable(self, "_on_weapon_collected"))
 	add_child(weapon_box)
-
-func _on_weapon_collected(weapon_strategy):
-	pass 

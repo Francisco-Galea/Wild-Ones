@@ -7,7 +7,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u3t4n"]
 radius = 7.0
-height = 46.0
+height = 16.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rh505"]
 radius = 8.0
@@ -15,6 +15,7 @@ height = 50.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_mffje")
+metadata/_edit_group_ = true
 
 [node name="PlayerName" type="Label" parent="."]
 modulate = Color(0, 0, 0, 1)
@@ -22,6 +23,7 @@ offset_left = -34.0
 offset_top = -59.0
 offset_right = 33.0
 offset_bottom = -36.0
+metadata/_edit_lock_ = true
 
 [node name="Health" type="Node2D" parent="."]
 script = ExtResource("32_awdvc")
@@ -33,7 +35,7 @@ texture = ExtResource("2_biaib")
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -4)
+position = Vector2(-1, 11)
 shape = SubResource("CapsuleShape2D_u3t4n")
 metadata/_edit_lock_ = true
 
@@ -55,5 +57,6 @@ metadata/_edit_lock_ = true
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_c38la")
+metadata/_edit_lock_ = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
