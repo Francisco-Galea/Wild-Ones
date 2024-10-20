@@ -4,7 +4,6 @@ extends CharacterBody2D
 @onready var projectile_spawn_point: Marker2D = $Pivot/projectile_spawn_point
 @onready var deathSound = $DeathSound
 @onready var player_name_label: Label = $PlayerName
-@onready var weapons_hud: Control = $WeaponsHud
 
 var player_name: String
 var velocidad: int = 200
@@ -97,15 +96,4 @@ func _on_died():
 	queue_free()
 	get_parent().player_died(self)
 
-func add_ammo_to_weapon(weapon_strategy: WeaponStrategy, amount: int):
-	for weapon in weapons:
-		if weapon.get_class() == weapon_strategy.get_class():
-			weapon.ammo += amount
-			print(name + " ha recibido " + str(amount) + " municiones para " + weapon_strategy.get_weapon_description() + ". Munición actual: " + str(weapon.ammo))
 
-func get_available_weapons() -> Array:
-	var available_weapons = []
-	for weapon in weapons:
-		available_weapons.append(weapon) 
-	available_weapons.erase(GrenadeStrategy)
-	return available_weapons
