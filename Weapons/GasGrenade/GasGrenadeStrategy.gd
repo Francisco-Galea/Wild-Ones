@@ -4,10 +4,10 @@ class_name GasGrenadeStrategy
 var gas_grenade_scene: PackedScene = preload("res://Weapons/GasGrenade/GasGrenade.tscn")
 
 func _init():
-	ammo = 0
+	ammo = 50
 
 func shoot(start_position: Vector2, direction: Vector2) -> Node2D:
-	if not has_ammo():  # Verifica si hay munición antes de disparar
+	if not has_ammo():  
 		print("No hay munición para disparar la granada.")
 		return null
 	

@@ -14,7 +14,8 @@ var current_weapon_index: int = 0
 var current_weapon: WeaponStrategy
 var weapons: Array = [
 	GrenadeStrategy.new(),
-	GasGrenadeStrategy.new()
+	GasGrenadeStrategy.new(),
+	TripMineStrategy.new()
 ]
 
 func _ready():

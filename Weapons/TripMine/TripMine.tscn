@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctunpgd1hdl75"]
+[gd_scene load_steps=10 format=3 uid="uid://ctunpgd1hdl75"]
 
 [ext_resource type="Script" path="res://Weapons/TripMine/TripMine.gd" id="1_0xxvq"]
 [ext_resource type="Texture2D" uid="uid://cb04aohqp1cid" path="res://IdeasFuture/Images/TripMine.png" id="1_7p6gu"]
@@ -12,6 +12,27 @@ size = Vector2(38, 14)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h4p42"]
 radius = 85.0059
+
+[sub_resource type="Curve" id="Curve_l44w5"]
+max_value = 100.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_kjcxg"]
+curve = SubResource("Curve_l44w5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3vsna"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 0, 0)
+damping_min = 200.0
+damping_max = 400.0
+damping_curve = SubResource("CurveTexture_kjcxg")
+scale_min = 4.0
+scale_max = 7.0
 
 [node name="TripMine" type="RigidBody2D"]
 script = ExtResource("1_0xxvq")
@@ -37,9 +58,24 @@ shape = SubResource("RectangleShape2D_euv7f")
 [node name="ExplosionShape" type="CollisionShape2D" parent="ExplosionArea"]
 shape = SubResource("CircleShape2D_h4p42")
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ExplosionArea"]
+modulate = Color(0.223529, 0.223529, 0.223529, 1)
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_3vsna")
+lifetime = 2.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+
 [node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_xs5d6")
 
 [node name="ActivationTime" type="Timer" parent="."]
 
+[node name="delay_time" type="Timer" parent="."]
+wait_time = 4096.0
+one_shot = true
+
 [connection signal="body_entered" from="ActivationArea" to="." method="_on_activation_area_body_entered"]
+[connection signal="timeout" from="delay_time" to="." method="_on_delay_time_timeout"]

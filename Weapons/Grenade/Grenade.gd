@@ -5,6 +5,7 @@ var destruction_radius: int = 1
 @onready var explosion_sound = $explosion
 @onready  var fire_in_the_hole = $throwGrenade
 @onready var explosion_particles = $Area2D/GPUParticles2D
+@onready var grenade_sprite = $Sprite2D
 
 func _ready():
 	$Timer.start()
@@ -24,7 +25,8 @@ func explode():
 			body.take_damage(explosion_damage)
 		if body is TileMap:
 			destroy_terrain(body, global_position)
-	explosion_particles.emitting = false
+	grenade_sprite.hide()
+	##explosion_particles.emitting = false
 	await explosion_sound.finished
 	queue_free()
 
