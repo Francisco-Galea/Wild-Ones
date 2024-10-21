@@ -8,5 +8,5 @@ class_name GameHud
 func update_hud(player_name: String, turn_time: float, weapon: WeaponStrategy):
 	player_name_label.text = "Turno de: " + player_name
 	turn_time_label.text = "Tiempo restante: " + str(int(turn_time)) + "s"
-	weapon_name_label.text = "Arma: " + weapon.get_weapon_description()
+	weapon_name_label.text = weapon.get_weapon_description()
 
