@@ -14,8 +14,8 @@ func _on_button_back_pressed():
 
 func _on_button_next_pressed():
 	var player_count = int(player_count_lineedit.text)
-	if player_count < 2 or player_count > 5:
-		print("El número de jugadores debe ser entre 2 y 5")
+	if player_count < 2 or player_count > 4:
+		print("El número de jugadores debe ser entre 2 y 4")
 		return
 	start_game(player_count)
 	queue_free()

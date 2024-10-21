@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var projectile_spawn_point: Marker2D = $Pivot/projectile_spawn_point
 @onready var deathSound = $DeathSound
 @onready var player_name_label: Label = $PlayerName
-
+var turn_manager: TurnManager  # Add this line
 var player_name: String
 var velocidad: int = 200
 var gravity: float
@@ -59,7 +59,8 @@ func handle_movement():
 	if Input.is_action_just_pressed("shoot") and not has_shot:
 		shoot_projectile()
 		has_shot = true
-		get_parent().end_turn()
+		if turn_manager:  # Add this check
+			turn_manager.end_turn()  # Call end_turn() on TurnManager instead
 
 func handle_weapon_switch():
 	if Input.is_action_just_pressed("switch_weapon_next"):
@@ -99,3 +100,5 @@ func _on_died():
 func get_current_weapon() -> WeaponStrategy:
 	return current_weapon
 
+func set_turn_manager(manager: TurnManager):
+	turn_manager = manager
