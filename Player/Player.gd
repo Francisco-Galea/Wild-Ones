@@ -18,6 +18,8 @@ var weapons: Array = [
 	GasGrenadeStrategy.new(),
 	TripMineStrategy.new()
 ]
+signal player_died(player)
+
 
 func _ready():
 	gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -94,8 +96,8 @@ func _on_died():
 	hide()
 	set_physics_process(false)
 	await deathSound.finished
+	emit_signal("player_died", self)  # Emit a signal instead of calling a function
 	queue_free()
-	get_parent().player_died(self)
 
 func get_current_weapon() -> WeaponStrategy:
 	return current_weapon

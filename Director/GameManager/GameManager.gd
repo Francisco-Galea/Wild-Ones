@@ -51,6 +51,7 @@ func create_players():
 		var player_instance = player_scene.instantiate()
 		player_instance.name = "Player" + str(i + 1)  
 		player_instance.position = spawn_manager.get_random_spawn_point()
+		player_instance.connect("player_died", _on_player_died)  # Connect the signal
 		add_child(player_instance)
 		players.append(player_instance)
 
@@ -74,3 +75,8 @@ func _on_turn_ended():
 
 func _on_game_ended(winner_name: String):
 	print("Game ended. Winner: " + winner_name)
+
+func _on_player_died(dead_player):
+	players.erase(dead_player)
+	if turn_manager:
+		turn_manager.player_died(dead_player)
