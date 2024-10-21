@@ -1,27 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://bej7yk85m254i"]
+[gd_scene load_steps=6 format=3 uid="uid://lg0cf81yhvyl"]
 
 [ext_resource type="Script" path="res://Menu/Menu/Menu.gd" id="1_fhoec"]
+[ext_resource type="Texture2D" uid="uid://xqdjlsxyguvt" path="res://Menu/Sprite/vybwLa.jpg" id="2_uwvdc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3nyd6"]
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pvf71"]
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0b7a1"]
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
 
 [node name="Menu" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_fhoec")
-
-[node name="Button2Players" type="Button" parent="."]
-layout_mode = 0
-offset_left = 297.0
-offset_top = 314.0
-offset_right = 395.0
-offset_bottom = 345.0
-text = "2 jugadores"
-
-[node name="Button3Players" type="Button" parent="."]
-layout_mode = 0
-offset_left = 605.0
-offset_top = 317.0
-offset_right = 703.0
-offset_bottom = 348.0
-text = "3 jugadores"
+metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
@@ -33,5 +32,68 @@ text = "Seleccione cuantos jugadores van a jugar
 "
 horizontal_alignment = 1
 
-[connection signal="pressed" from="Button2Players" to="." method="_on_Button2Players_pressed"]
-[connection signal="pressed" from="Button3Players" to="." method="_on_Button3Players_pressed"]
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_uwvdc")
+expand_mode = 2
+stretch_mode = 6
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -254.0
+offset_top = -188.0
+offset_right = 246.0
+offset_bottom = 272.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_3nyd6")
+text = "Seleccione la cantidad de jugadores"
+
+[node name="PlayerCount" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+placeholder_text = "4"
+alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+
+[node name="ButtonBack" type="Button" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_pvf71")
+text = "Atras
+"
+
+[node name="ButtonNext" type="Button" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_0b7a1")
+text = "Siguiente"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/ButtonBack" to="." method="_on_button_back_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/ButtonNext" to="." method="_on_button_next_pressed"]

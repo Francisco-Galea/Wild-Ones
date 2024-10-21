@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://fbo8wkpnl20n"]
+
+[ext_resource type="Script" path="res://Director/TurnManager/TurnManager.gd" id="1_uc3bl"]
+
+[node name="TurnManager" type="Node2D"]
+script = ExtResource("1_uc3bl")
+
+[node name="TurnTimer" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
+
+[node name="GracePeriodTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="TurnTransitionTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="TurnTimer" to="." method="_on_turn_timer_timeout"]
+[connection signal="timeout" from="GracePeriodTimer" to="." method="_on_grace_period_timer_timeout"]
+[connection signal="timeout" from="TurnTransitionTimer" to="." method="_on_turn_transition_timer_timeout"]

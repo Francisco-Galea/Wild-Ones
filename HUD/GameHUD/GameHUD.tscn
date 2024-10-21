@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://batplbsn1if7m"]
+
+[ext_resource type="Script" path="res://HUD/GameHUD/GameHUD.gd" id="1_qnvdo"]
+
+[node name="GameHud" type="CanvasLayer"]
+script = ExtResource("1_qnvdo")
+metadata/_edit_group_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+modulate = Color(0, 0, 0, 1)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 50.0
+grow_horizontal = 2
+
+[node name="lblPlayerName" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="lblTurnTime" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainerWeapon" type="VBoxContainer" parent="."]
+modulate = Color(0, 0, 0, 1)
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="lblWeaponSelected" type="Label" parent="VBoxContainerWeapon"]
+layout_mode = 2
+text = "Arma seleccionada:"
+
+[node name="lblWeaponName" type="Label" parent="VBoxContainerWeapon"]
+layout_mode = 2

@@ -1,68 +1,76 @@
 extends Node2D
+class_name GameManager
 
-var player_scene: PackedScene = preload("res://Player/Player.tscn")
-var world_scene: PackedScene = preload("res://World/World.tscn")
-var player_count
-var players: Array = []
-var current_player_index: int = 0
-@onready var turn_timer: Timer = $TurnTimer
-@onready var grace_period_timer: Timer = $GracePeriodTimer
+@export var player_scene: PackedScene = preload("res://Player/Player.tscn")
+@export var world_scene: PackedScene = preload("res://World/World.tscn")
+@export var drop_manager_scene: PackedScene = preload("res://Director/DropManager/DropManager.tscn")
+@export var game_hud_scene: PackedScene = preload("res://HUD/GameHUD/GameHUD.tscn")
+@export var turn_manager_scene: PackedScene = preload("res://Director/TurnManager/TurnManager.tscn")
+
+var player_count: int
+var players: Array[CharacterBody2D] = []
 var world_instance: Node
 var spawn_manager: SpawnManager
+var drop_manager: Node2D  
+var game_hud: GameHud
+var turn_manager: TurnManager
 
 func _ready():
 	create_world()
 	create_players()
-	initialize_turn_system()
+	setup_turn_manager()
+	setup_drop_manager()
+	setup_game_hud()
+
+func setup_game_hud():
+	game_hud = game_hud_scene.instantiate()
+	add_child(game_hud)
+	update_hud()
+
+func setup_drop_manager():
+	drop_manager = drop_manager_scene.instantiate()
+	add_child(drop_manager)
+
+func setup_turn_manager():
+	turn_manager = turn_manager_scene.instantiate()
+	add_child(turn_manager)
+	turn_manager.initialize(players)
+	turn_manager.connect("turn_started", _on_turn_started)
+	turn_manager.connect("turn_ended", _on_turn_ended)
+	turn_manager.connect("game_ended", _on_game_ended)
+	for player in players:
+		player.set_turn_manager(turn_manager)
 
 func set_player_count(count: int):
 	player_count = count
 
 func create_players():
 	spawn_manager.reset_available_spawn_points()
+	players.clear()
 	for i in range(player_count):
 		var player_instance = player_scene.instantiate()
-		player_instance.name = "Player" + str(i + 1)
+		player_instance.name = "Player" + str(i + 1)  
 		player_instance.position = spawn_manager.get_random_spawn_point()
 		add_child(player_instance)
 		players.append(player_instance)
 
 func create_world():
-	var world_instance = world_scene.instantiate()
+	world_instance = world_scene.instantiate()
 	add_child(world_instance)
 	spawn_manager = world_instance.get_node("SpawnPoints") as SpawnManager
-	if spawn_manager == null:
-		push_error("SpawnPoints node not found in World scene!")
 
-func initialize_turn_system():
-	start_turn()
+func _process(delta: float):
+	update_hud()
 
-func start_turn():
-	print("Periodo de gracia antes del turno de " + players[current_player_index].name)
-	grace_period_timer.start()  
-	set_players_turn_controls(false)  
+func update_hud():
+	var current_player = turn_manager.get_current_player()
+	game_hud.update_hud(current_player.name, turn_manager.get_turn_time_remaining(), current_player.get_current_weapon())
 
-func set_players_turn_controls(enable: bool):
-	for i in range(players.size()):
-		players[i].set_turn(enable and i == current_player_index)
+func _on_turn_started(player_name: String):
+	print("Turn started for " + player_name)
 
-func end_turn():
-	turn_timer.stop() 
-	players[current_player_index].set_turn(false)  
-	current_player_index = (current_player_index + 1) % players.size() 
-	start_turn()
+func _on_turn_ended():
+	print("Turn ended")
 
-func _on_turn_timer_timeout():
-	end_turn()
-
-func _on_grace_period_timer_timeout():
-	print("Periodo de gracia finalizado. Turno de " + players[current_player_index].name)
-	turn_timer.start()
-	set_players_turn_controls(true) 
-
-func player_died(dead_player):
-	players.erase(dead_player)
-	if dead_player == players[current_player_index]:
-		end_turn()
-
-
+func _on_game_ended(winner_name: String):
+	print("Game ended. Winner: " + winner_name)

@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://ck756poeie70r"]
+
+[ext_resource type="Script" path="res://Weapons/Rasengan/Rasengan.gd" id="1_pc5bn"]
+[ext_resource type="Texture2D" uid="uid://ccfmspxbnjgh0" path="res://Weapons/Sprites/Rasengan/rasenganAttept.png" id="2_kmk1y"]
+[ext_resource type="AudioStream" uid="uid://bwra66jysca4a" path="res://Weapons/Sounds/thunder_clap.wav" id="3_dymus"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b4cg2"]
+radius = 23.0
+
+[node name="Rasengan" type="RigidBody2D"]
+gravity_scale = 0.0
+max_contacts_reported = 10
+contact_monitor = true
+script = ExtResource("1_pc5bn")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.779593, 0.730699)
+texture = ExtResource("2_kmk1y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_b4cg2")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="LaunchSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_dymus")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
