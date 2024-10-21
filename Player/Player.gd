@@ -96,4 +96,6 @@ func _on_died():
 	queue_free()
 	get_parent().player_died(self)
 
+func get_current_weapon() -> WeaponStrategy:
+	return current_weapon
 

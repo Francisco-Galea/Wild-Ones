@@ -1,4 +1,5 @@
 extends Node2D
+class_name GameManager
 
 @export var player_scene: PackedScene = preload("res://Player/Player.tscn")
 @export var world_scene: PackedScene = preload("res://World/World.tscn")
@@ -24,8 +25,9 @@ func _ready():
 
 func setup_game_hud():
 	game_hud = game_hud_scene.instantiate()
+	var current_player = players[current_player_index]
 	add_child(game_hud)
-	game_hud.update_hud(players[current_player_index].name, turn_timer.wait_time)
+	game_hud.update_hud(current_player.name, turn_timer.wait_time, current_player.get_current_weapon())
 
 func setup_drop_manager():
 	drop_manager = drop_manager_scene.instantiate()
@@ -119,10 +121,12 @@ func _process(delta: float):
 	if turn_timer.is_stopped():
 		return
 	var time_remaining = turn_timer.time_left
-	game_hud.update_hud(players[current_player_index].name, time_remaining)
+	var current_player = players[current_player_index]
+	game_hud.update_hud(current_player.name, time_remaining, current_player.get_current_weapon())
 
 func _on_turn_transition_timer_timeout():
 	print("Periodo de gracia antes del turno de " + players[current_player_index].name)
 	grace_period_timer.start()
-	game_hud.update_hud(players[current_player_index].name, turn_timer.wait_time)
+	var current_player = players[current_player_index]
+	game_hud.update_hud(current_player.name, turn_timer.wait_time, current_player.get_current_weapon())
 
