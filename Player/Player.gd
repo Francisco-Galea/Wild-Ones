@@ -18,6 +18,8 @@ var weapons: Array = [
 	GasGrenadeStrategy.new(),
 	TripMineStrategy.new()
 ]
+signal player_died(player)
+
 
 func _ready():
 	gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -59,8 +61,8 @@ func handle_movement():
 	if Input.is_action_just_pressed("shoot") and not has_shot:
 		shoot_projectile()
 		has_shot = true
-		if turn_manager:  # Add this check
-			turn_manager.end_turn()  # Call end_turn() on TurnManager instead
+		if turn_manager:  
+			turn_manager.end_turn()  
 
 func handle_weapon_switch():
 	if Input.is_action_just_pressed("switch_weapon_next"):
@@ -94,8 +96,8 @@ func _on_died():
 	hide()
 	set_physics_process(false)
 	await deathSound.finished
+	emit_signal("player_died", self)  
 	queue_free()
-	get_parent().player_died(self)
 
 func get_current_weapon() -> WeaponStrategy:
 	return current_weapon
