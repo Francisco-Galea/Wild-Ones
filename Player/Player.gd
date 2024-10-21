@@ -61,8 +61,8 @@ func handle_movement():
 	if Input.is_action_just_pressed("shoot") and not has_shot:
 		shoot_projectile()
 		has_shot = true
-		if turn_manager:  # Add this check
-			turn_manager.end_turn()  # Call end_turn() on TurnManager instead
+		if turn_manager:  
+			turn_manager.end_turn()  
 
 func handle_weapon_switch():
 	if Input.is_action_just_pressed("switch_weapon_next"):
@@ -96,7 +96,7 @@ func _on_died():
 	hide()
 	set_physics_process(false)
 	await deathSound.finished
-	emit_signal("player_died", self)  # Emit a signal instead of calling a function
+	emit_signal("player_died", self)  
 	queue_free()
 
 func get_current_weapon() -> WeaponStrategy:

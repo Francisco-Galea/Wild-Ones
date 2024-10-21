@@ -51,7 +51,7 @@ func create_players():
 		var player_instance = player_scene.instantiate()
 		player_instance.name = "Player" + str(i + 1)  
 		player_instance.position = spawn_manager.get_random_spawn_point()
-		player_instance.connect("player_died", _on_player_died)  # Connect the signal
+		player_instance.connect("player_died", _on_player_died) 
 		add_child(player_instance)
 		players.append(player_instance)
 
