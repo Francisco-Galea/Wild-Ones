@@ -1,24 +1,29 @@
-extends Node
+extends Control
 
-signal scene_changed(new_scene: Node)
-
-var current_scene: Node = null
-
-func change_scene(new_scene_path: String) -> void:
-	if current_scene:
-		current_scene.queue_free()
-	var new_scene = load(new_scene_path).instantiate()
-	get_tree().root.add_child(new_scene)
-	current_scene = new_scene
-	emit_signal("scene_changed", current_scene)
-
-func get_current_scene() -> Node:
-	return current_scene
+@onready var fullscreen_button: Button = $VBoxContainer/FullScreenButton
+@onready var mute_button: Button = $VBoxContainer/MuteButton
 
 func _ready() -> void:
-	var root = get_tree().root
-	current_scene = root.get_child(root.get_child_count() - 1)
+	ConfigManager.fullscreen_changed.connect(_on_fullscreen_changed)
+	ConfigManager.volume_changed.connect(_on_volume_changed)
+	_on_fullscreen_changed(ConfigManager.is_fullscreen)
+	_on_volume_changed(ConfigManager.is_muted)
 
+func _on_fullscreen_button_pressed() -> void:
+	ConfigManager.toggle_fullscreen()
 
+func _on_mute_button_pressed() -> void:
+	ConfigManager.toggle_mute()
 
+func _on_save_button_pressed() -> void:
+	ConfigManager.save_settings()
+
+func _on_fullscreen_changed(is_fullscreen: bool) -> void:
+	fullscreen_button.text = "Pantalla Completa: " + ("ON" if is_fullscreen else "OFF")
+
+func _on_back_button_pressed():
+	SceneManager.change_scene("res://Menu/MainScene/MainScene.tscn")
+
+func _on_volume_changed(is_muted: bool) -> void:
+	mute_button.text = "Silenciar: " + ("ON" if is_muted else "OFF")
 
