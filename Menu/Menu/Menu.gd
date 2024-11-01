@@ -9,14 +9,12 @@ func start_game(player_count: int):
 	get_tree().root.add_child(game_manager)
 
 func _on_button_back_pressed():
-	get_tree().change_scene_to_file("res://Menu/MainScene/MainScene.tscn")
-	queue_free()
+	SceneManager.change_scene("res://Menu/MainScene/MainScene.tscn")
 
 func _on_button_next_pressed():
 	var player_count = int(player_count_lineedit.text)
 	if player_count < 2 or player_count > 4:
-		print("El número de jugadores debe ser entre 2 y 4")
 		return
 	start_game(player_count)
-	queue_free()
+
 

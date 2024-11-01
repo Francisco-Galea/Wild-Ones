@@ -40,16 +40,11 @@ func load_settings() -> void:
 	if error == OK:
 		is_fullscreen = config.get_value("video", "fullscreen", false)
 		is_muted = config.get_value("audio", "muted", false)
-		
-		# Aplicar configuraciones cargadas
 		if is_fullscreen:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		else:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), is_muted)
-		
-		# Emitir señales para actualizar la UI
 		emit_signal("fullscreen_changed", is_fullscreen)
 		emit_signal("volume_changed", is_muted)
-	else:
-		print("No settings file found or error loading settings. Using defaults.")
+

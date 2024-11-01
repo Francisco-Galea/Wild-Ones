@@ -17,7 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-ConfigManager="*res://ConfigManager.gd"
+ConfigManager="*res://AutoLoads/ConfigManager.gd"
+SceneManager="*res://AutoLoads/SceneManager.gd"
 
 [display]
 
@@ -30,13 +31,14 @@ project/assembly_name="Wild Ones gd-script"
 [file_customization]
 
 folder_colors={
-"res://Director/": "pink",
+"res://AutoLoads/": "purple",
+"res://Director/": "blue",
 "res://Drops/": "gray",
 "res://HUD/": "teal",
 "res://IdeasFuture/": "orange",
-"res://Menu/": "blue",
+"res://Menu/": "pink",
 "res://Player/": "green",
-"res://Weapons/": "purple",
+"res://Weapons/": "red",
 "res://World/": "yellow"
 }
 
