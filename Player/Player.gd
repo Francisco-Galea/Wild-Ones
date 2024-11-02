@@ -4,7 +4,8 @@ extends CharacterBody2D
 @onready var projectile_spawn_point: Marker2D = $Pivot/projectile_spawn_point
 @onready var deathSound = $DeathSound
 @onready var player_name_label: Label = $PlayerName
-var turn_manager: TurnManager  # Add this line
+
+var turn_manager: TurnManager
 var player_name: String
 var velocidad: int = 200
 var gravity: float
@@ -18,8 +19,8 @@ var weapons: Array = [
 	GasGrenadeStrategy.new(),
 	TripMineStrategy.new()
 ]
-signal player_died(player)
 
+signal player_died(player)
 
 func _ready():
 	gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -37,12 +38,16 @@ func _physics_process(delta):
 		handle_weapon_switch()
 	move_and_slide()
 
-func set_turn(turn: bool):
-	is_turn = turn 
-	if turn:
-		has_shot = false
-	else:
-		stop_movement()
+func start_turn():
+	is_turn = true
+	has_shot = false
+	print(name + " is starting their turn")
+
+func end_turn():
+	is_turn = false
+	has_shot = false
+	stop_movement()
+	print(name + " is ending their turn")
 
 func stop_movement():
 	velocity = Vector2.ZERO
@@ -54,15 +59,13 @@ func handle_gravity(delta: float):
 		velocity.y = 0
 
 func handle_movement():
-	var input_direction = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	var input_direction = Input.get_axis("move_left", "move_right")
 	velocity.x = input_direction * velocidad
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = -velocidad
 	if Input.is_action_just_pressed("shoot") and not has_shot:
 		shoot_projectile()
 		has_shot = true
-		if turn_manager:  
-			turn_manager.end_turn()  
 
 func handle_weapon_switch():
 	if Input.is_action_just_pressed("switch_weapon_next"):
@@ -91,6 +94,7 @@ func take_damage(amount: int):
 		_on_died()
 
 func _on_died():
+	is_dead = true
 	deathSound.play()
 	print(name + " ha muerto!")
 	hide()

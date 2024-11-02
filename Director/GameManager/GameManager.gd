@@ -38,8 +38,6 @@ func setup_turn_manager():
 	turn_manager.connect("turn_started", _on_turn_started)
 	turn_manager.connect("turn_ended", _on_turn_ended)
 	turn_manager.connect("game_ended", _on_game_ended)
-	for player in players:
-		player.set_turn_manager(turn_manager)
 
 func set_player_count(count: int):
 	player_count = count
@@ -65,18 +63,29 @@ func _process(delta: float):
 
 func update_hud():
 	var current_player = turn_manager.get_current_player()
-	game_hud.update_hud(current_player.name, turn_manager.get_turn_time_remaining(), current_player.get_current_weapon())
+	if current_player:
+		game_hud.update_hud(current_player.name, turn_manager.get_turn_time_remaining(), current_player.get_current_weapon())
 
-func _on_turn_started(player_name: String):
-	print("Turn started for " + player_name)
+func _on_turn_started(player: CharacterBody2D):
+	print("Turn started for " + player.name)
+	player.start_turn()
 
-func _on_turn_ended():
-	print("Turn ended")
+func _on_turn_ended(player: CharacterBody2D):
+	print("Turn ended for " + player.name)
+	player.end_turn()
 
-func _on_game_ended(winner_name: String):
-	print("Game ended. Winner: " + winner_name)
+func _on_game_ended(winner: CharacterBody2D):
+	if winner:
+		print("Game ended. Winner: " + winner.name)
+		game_hud.show_winner(winner.name)
+	else:
+		print("Game ended. No winner.")
+		game_hud.show_winner("Ninguno")
 
-func _on_player_died(dead_player):
+func _on_player_died(dead_player: CharacterBody2D):
 	players.erase(dead_player)
-	if turn_manager:
-		turn_manager.player_died(dead_player)
+	turn_manager.player_died(dead_player)
+
+func _on_return_to_main_menu():
+	SceneManager.change_scene("res://Menu/MainScene/MainScene.tscn")
+	queue_free()
