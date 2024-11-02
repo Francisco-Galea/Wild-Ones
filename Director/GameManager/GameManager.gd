@@ -86,6 +86,4 @@ func _on_player_died(dead_player: CharacterBody2D):
 	players.erase(dead_player)
 	turn_manager.player_died(dead_player)
 
-func _on_return_to_main_menu():
-	SceneManager.change_scene("res://Menu/MainScene/MainScene.tscn")
-	queue_free()
+

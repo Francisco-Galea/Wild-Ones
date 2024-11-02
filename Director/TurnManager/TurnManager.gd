@@ -9,18 +9,9 @@ var players: Array[CharacterBody2D] = []
 var current_player_index: int = -1
 var game_over: bool = false
 
-@export var turn_duration: float = 30.0
-@export var grace_period_duration: float = 3.0
-@export var turn_transition_duration: float = 1.0
-
 @onready var turn_timer: Timer = $TurnTimer
 @onready var grace_period_timer: Timer = $GracePeriodTimer
 @onready var turn_transition_timer: Timer = $TurnTransitionTimer
-
-func _ready():
-	turn_timer.wait_time = turn_duration
-	grace_period_timer.wait_time = grace_period_duration
-	turn_transition_timer.wait_time = turn_transition_duration
 
 func initialize(player_list: Array[CharacterBody2D]):
 	players = player_list
@@ -36,12 +27,10 @@ func start_game():
 func start_turn():
 	if game_over:
 		return
-	
 	current_player_index = get_next_valid_player_index()
 	if current_player_index == -1:
 		end_game()
 		return
-	
 	var current_player = players[current_player_index]
 	print("Starting turn for " + current_player.name)
 	turn_transition_timer.start()
@@ -49,7 +38,6 @@ func start_turn():
 func end_turn():
 	if game_over:
 		return
-	
 	stop_all_timers()
 	var current_player = players[current_player_index]
 	current_player.end_turn()
@@ -60,7 +48,6 @@ func end_turn():
 func player_died(dead_player: CharacterBody2D):
 	players.erase(dead_player)
 	print(dead_player.name + " has been eliminated!")
-	
 	if players.size() <= 1:
 		end_game()
 	elif dead_player == get_current_player():
@@ -69,7 +56,6 @@ func player_died(dead_player: CharacterBody2D):
 func end_game():
 	game_over = true
 	stop_all_timers()
-	
 	if players.size() == 1:
 		print("Game over! The winner is: " + players[0].name)
 		emit_signal("game_ended", players[0])

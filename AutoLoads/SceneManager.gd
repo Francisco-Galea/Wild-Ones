@@ -10,7 +10,6 @@ func change_scene(new_scene_path: String) -> void:
 	var new_scene = load(new_scene_path).instantiate()
 	get_tree().root.add_child(new_scene)
 	current_scene = new_scene
-	
 	emit_signal("scene_changed", current_scene)
 
 func get_current_scene() -> Node:

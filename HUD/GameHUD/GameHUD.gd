@@ -5,6 +5,7 @@ class_name GameHud
 @onready var turn_time_label: Label = $VBoxContainer/lblTurnTime
 @onready var weapon_name_label: Label = $VBoxContainerWeapon/lblWeaponName
 @onready var winner_label: Label = $VBoxContainerWinner/lblWinner
+@onready var return_timer: Timer = $ReturnTimer
 
 func _ready():
 	winner_label.hide()
@@ -20,3 +21,7 @@ func show_winner(player_name: String):
 	turn_time_label.hide()
 	weapon_name_label.hide()
 	player_name_label.hide()
+	return_timer.start()
+
+func _on_return_timer_timeout():
+	pass
