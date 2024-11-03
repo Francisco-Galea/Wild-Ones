@@ -108,3 +108,9 @@ func get_current_weapon() -> WeaponStrategy:
 
 func set_turn_manager(manager: TurnManager):
 	turn_manager = manager
+
+func has_weapon(weapon_strategy: WeaponStrategy) -> bool:
+	for weapon in weapons:
+		if weapon.get_script() == weapon_strategy.get_script():
+			return true
+	return false

@@ -14,7 +14,6 @@ var spawn_manager: SpawnManager
 var drop_manager: Node2D  
 var game_hud: GameHud
 var turn_manager: TurnManager
-var game_ended: bool = false
 
 func _ready():
 	create_world()

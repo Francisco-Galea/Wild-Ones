@@ -49,6 +49,7 @@ grow_vertical = 2
 
 [node name="lblWinner" type="Label" parent="VBoxContainerWinner"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 100
 
 [node name="ReturnTimer" type="Timer" parent="."]
 wait_time = 5.0
