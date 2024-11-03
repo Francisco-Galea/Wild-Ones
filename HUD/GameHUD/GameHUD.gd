@@ -7,6 +7,8 @@ class_name GameHud
 @onready var winner_label: Label = $VBoxContainerWinner/lblWinner
 @onready var return_timer: Timer = $ReturnTimer
 
+signal game_over
+
 func _ready():
 	winner_label.hide()
 
@@ -24,4 +26,4 @@ func show_winner(player_name: String):
 	return_timer.start()
 
 func _on_return_timer_timeout():
-	pass
+	emit_signal("game_over")

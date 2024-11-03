@@ -14,6 +14,7 @@ var spawn_manager: SpawnManager
 var drop_manager: Node2D  
 var game_hud: GameHud
 var turn_manager: TurnManager
+var game_ended: bool = false
 
 func _ready():
 	create_world()
@@ -25,6 +26,7 @@ func _ready():
 func setup_game_hud():
 	game_hud = game_hud_scene.instantiate()
 	add_child(game_hud)
+	game_hud.connect("game_over", _on_game_over)
 	update_hud()
 
 func setup_drop_manager():
@@ -62,6 +64,8 @@ func _process(delta: float):
 	update_hud()
 
 func update_hud():
+	if not is_instance_valid(turn_manager) or not is_instance_valid(game_hud):
+		return
 	var current_player = turn_manager.get_current_player()
 	if current_player:
 		game_hud.update_hud(current_player.name, turn_manager.get_turn_time_remaining(), current_player.get_current_weapon())
@@ -86,4 +90,14 @@ func _on_player_died(dead_player: CharacterBody2D):
 	players.erase(dead_player)
 	turn_manager.player_died(dead_player)
 
-
+func _on_game_over():
+	for child in get_children():
+		child.queue_free()
+	await get_tree().process_frame
+	var root = get_tree().root
+	for child in root.get_children():
+		if child != self and child.name != "SceneManager" and child.name != "ConfigManager":
+				child.queue_free()
+	await get_tree().process_frame
+	get_tree().change_scene_to_file("res://Menu/MainScene/MainScene.tscn")
+	queue_free()

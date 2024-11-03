@@ -5,6 +5,8 @@ func _on_buttonExit_game_pressed() -> void:
 
 func _on_button_play_pressed() -> void:
 	SceneManager.change_scene("res://Menu/Menu/Menu.tscn")
+	queue_free()
 
 func _on_button_config_pressed() -> void:
 	SceneManager.change_scene("res://Menu/ConfigMenu/ConfigMenu.tscn")
+	queue_free()
