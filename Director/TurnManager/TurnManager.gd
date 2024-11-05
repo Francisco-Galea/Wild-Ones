@@ -31,8 +31,6 @@ func start_turn():
 	if current_player_index == -1:
 		end_game()
 		return
-	var current_player = players[current_player_index]
-	print("Starting turn for " + current_player.name)
 	turn_transition_timer.start()
 
 func end_turn():
@@ -41,13 +39,11 @@ func end_turn():
 	stop_all_timers()
 	var current_player = players[current_player_index]
 	current_player.end_turn()
-	print("Ending turn for " + current_player.name)
 	emit_signal("turn_ended", current_player)
 	start_turn()
 
 func player_died(dead_player: CharacterBody2D):
 	players.erase(dead_player)
-	print(dead_player.name + " has been eliminated!")
 	if players.size() <= 1:
 		end_game()
 	elif dead_player == get_current_player():
@@ -57,10 +53,8 @@ func end_game():
 	game_over = true
 	stop_all_timers()
 	if players.size() == 1:
-		print("Game over! The winner is: " + players[0].name)
 		emit_signal("game_ended", players[0])
 	else:
-		print("Game over! No winners.")
 		emit_signal("game_ended", null)
 
 func get_next_valid_player_index() -> int:
@@ -85,13 +79,11 @@ func stop_all_timers():
 	turn_transition_timer.stop()
 
 func _on_turn_timer_timeout():
-	print("Turn time ended for " + get_current_player().name)
 	end_turn()
 
 func _on_grace_period_timer_timeout():
 	var current_player = get_current_player()
 	if current_player:
-		print("Grace period ended. Starting turn for " + current_player.name)
 		turn_timer.start()
 		current_player.start_turn()
 		emit_signal("turn_started", current_player)
@@ -101,7 +93,6 @@ func _on_grace_period_timer_timeout():
 func _on_turn_transition_timer_timeout():
 	var current_player = get_current_player()
 	if current_player:
-		print("Turn transition ended. Starting grace period for " + current_player.name)
 		grace_period_timer.start()
 	else:
 		end_turn()

@@ -48,7 +48,7 @@ func create_players():
 	players.clear()
 	for i in range(player_count):
 		var player_instance = player_scene.instantiate()
-		player_instance.name = "Player" + str(i + 1)  
+		player_instance.name = "Player " + str(i + 1)  
 		player_instance.position = spawn_manager.get_random_spawn_point()
 		player_instance.connect("player_died", _on_player_died) 
 		add_child(player_instance)
@@ -70,19 +70,15 @@ func update_hud():
 		game_hud.update_hud(current_player.name, turn_manager.get_turn_time_remaining(), current_player.get_current_weapon())
 
 func _on_turn_started(player: CharacterBody2D):
-	print("Turn started for " + player.name)
 	player.start_turn()
 
 func _on_turn_ended(player: CharacterBody2D):
-	print("Turn ended for " + player.name)
 	player.end_turn()
 
 func _on_game_ended(winner: CharacterBody2D):
 	if winner:
-		print("Game ended. Winner: " + winner.name)
 		game_hud.show_winner(winner.name)
 	else:
-		print("Game ended. No winner.")
 		game_hud.show_winner("Ninguno")
 
 func _on_player_died(dead_player: CharacterBody2D):

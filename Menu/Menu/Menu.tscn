@@ -62,23 +62,23 @@ alignment = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="LblPlayerCount" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = SubResource("StyleBoxFlat_3nyd6")
 text = "Seleccione la cantidad de jugadores"
 
-[node name="PlayerCount" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+[node name="TxtPlayerCount" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
-placeholder_text = "4"
+placeholder_text = "2 - 4"
 alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainerButtons" type="HBoxContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(500, 100)
 layout_mode = 2
 
-[node name="ButtonBack" type="Button" parent="VBoxContainer/HBoxContainer2"]
+[node name="ButtonBack" type="Button" parent="VBoxContainer/HBoxContainerButtons"]
 custom_minimum_size = Vector2(500, 100)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -87,12 +87,12 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_pvf71")
 text = "Atras
 "
 
-[node name="ButtonNext" type="Button" parent="VBoxContainer/HBoxContainer2"]
+[node name="ButtonNext" type="Button" parent="VBoxContainer/HBoxContainerButtons"]
 custom_minimum_size = Vector2(500, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = SubResource("StyleBoxFlat_0b7a1")
 text = "Siguiente"
 
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/ButtonBack" to="." method="_on_button_back_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/ButtonNext" to="." method="_on_button_next_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainerButtons/ButtonBack" to="." method="_on_button_back_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainerButtons/ButtonNext" to="." method="_on_button_next_pressed"]

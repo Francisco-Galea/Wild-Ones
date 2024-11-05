@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://batplbsn1if7m"]
+[gd_scene load_steps=4 format=3 uid="uid://batplbsn1if7m"]
 
 [ext_resource type="Script" path="res://HUD/GameHUD/GameHUD.gd" id="1_qnvdo"]
+[ext_resource type="AudioStream" uid="uid://ct3m3cmup0bvm" path="res://HUD/Sounds/videoplayback (mp3cut.net).wav" id="2_mhlni"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ivr2y"]
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
 
 [node name="GameHud" type="CanvasLayer"]
 script = ExtResource("1_qnvdo")
@@ -16,10 +20,10 @@ offset_right = 20.0
 offset_bottom = 50.0
 grow_horizontal = 2
 
-[node name="lblPlayerName" type="Label" parent="VBoxContainer"]
+[node name="LblPlayerName" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="lblTurnTime" type="Label" parent="VBoxContainer"]
+[node name="LblTurnTime" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 
 [node name="VBoxContainerWeapon" type="VBoxContainer" parent="."]
@@ -27,11 +31,11 @@ modulate = Color(0, 0, 0, 1)
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="lblWeaponSelected" type="Label" parent="VBoxContainerWeapon"]
+[node name="LblWeaponSelected" type="Label" parent="VBoxContainerWeapon"]
 layout_mode = 2
 text = "Arma seleccionada:"
 
-[node name="lblWeaponName" type="Label" parent="VBoxContainerWeapon"]
+[node name="LblWeaponName" type="Label" parent="VBoxContainerWeapon"]
 layout_mode = 2
 
 [node name="VBoxContainerWinner" type="VBoxContainer" parent="."]
@@ -47,12 +51,17 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="lblWinner" type="Label" parent="VBoxContainerWinner"]
+[node name="LblWinner" type="Label" parent="VBoxContainerWinner"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 70
+theme_override_styles/normal = SubResource("StyleBoxFlat_ivr2y")
+uppercase = true
 
 [node name="ReturnTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 6.0
 one_shot = true
+
+[node name="WinnerSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_mhlni")
 
 [connection signal="timeout" from="ReturnTimer" to="." method="_on_return_timer_timeout"]

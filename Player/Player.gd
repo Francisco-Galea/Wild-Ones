@@ -10,14 +10,11 @@ var player_name: String
 var velocidad: int = 200
 var gravity: float
 var is_dead: bool = false
-var is_turn: bool = false
 var has_shot: bool = false
 var current_weapon_index: int = 0
 var current_weapon: WeaponStrategy
 var weapons: Array = [
 	GrenadeStrategy.new(),
-	GasGrenadeStrategy.new(),
-	TripMineStrategy.new()
 ]
 
 signal player_died(player)
@@ -29,25 +26,27 @@ func _ready():
 	set_current_weapon(0)
 	player_name_label.text = name
 	player_name = name
+	set_process_input(false)  
 
 func _physics_process(delta):
 	$Pivot.look_at(get_global_mouse_position())
 	handle_gravity(delta)
-	if is_turn:
-		handle_movement()
-		handle_weapon_switch()
 	move_and_slide()
 
+func _input(event):
+	if event.is_action_pressed("shoot") and not has_shot:
+		shoot_projectile()
+		has_shot = true
+	elif event.is_action_pressed("switch_weapon_next"):
+		handle_weapon_switch()
+
 func start_turn():
-	is_turn = true
-	has_shot = false
-	print(name + " is starting their turn")
+	set_process_input(true)  
 
 func end_turn():
-	is_turn = false
+	set_process_input(false)  
 	has_shot = false
 	stop_movement()
-	print(name + " is ending their turn")
 
 func stop_movement():
 	velocity = Vector2.ZERO
@@ -58,28 +57,27 @@ func handle_gravity(delta: float):
 	else:
 		velocity.y = 0
 
+func _process(delta):
+	if is_processing_input():
+		handle_movement()
+
 func handle_movement():
 	var input_direction = Input.get_axis("move_left", "move_right")
 	velocity.x = input_direction * velocidad
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = -velocidad
-	if Input.is_action_just_pressed("shoot") and not has_shot:
-		shoot_projectile()
-		has_shot = true
 
 func handle_weapon_switch():
-	if Input.is_action_just_pressed("switch_weapon_next"):
-		current_weapon_index = (current_weapon_index + 1) % weapons.size()
-		set_current_weapon(current_weapon_index)
+	current_weapon_index = (current_weapon_index + 1) % weapons.size()
+	set_current_weapon(current_weapon_index)
 
 func set_current_weapon(index: int):
 	current_weapon = weapons[index]
-	print("Switched to " + current_weapon.get_weapon_description())
 
 func collect_weapon(weapon_strategy: WeaponStrategy):
-	weapons.append(weapon_strategy)
-	set_current_weapon(weapons.size() - 1)  
-	print(name + " collected " + weapon_strategy.get_weapon_description())
+	if not has_weapon(weapon_strategy):
+		weapons.append(weapon_strategy)
+		set_current_weapon(weapons.size() - 1)  
 
 func shoot_projectile():
 	var mouse_position = get_global_mouse_position()
@@ -88,7 +86,6 @@ func shoot_projectile():
 	get_tree().root.add_child(projectile)
 
 func take_damage(amount: int):
-	print(name + " took " + str(amount) + " damage!")
 	health_component.take_damage(amount)
 	if health_component.current_health <= 0:
 		_on_died()
@@ -96,9 +93,7 @@ func take_damage(amount: int):
 func _on_died():
 	is_dead = true
 	deathSound.play()
-	print(name + " ha muerto!")
 	hide()
-	set_physics_process(false)
 	await deathSound.finished
 	emit_signal("player_died", self)  
 	queue_free()

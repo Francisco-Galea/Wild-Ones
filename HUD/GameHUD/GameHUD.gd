@@ -1,11 +1,12 @@
 extends CanvasLayer
 class_name GameHud
 
-@onready var player_name_label: Label = $VBoxContainer/lblPlayerName
-@onready var turn_time_label: Label = $VBoxContainer/lblTurnTime
-@onready var weapon_name_label: Label = $VBoxContainerWeapon/lblWeaponName
-@onready var winner_label: Label = $VBoxContainerWinner/lblWinner
+@onready var player_name_label: Label = $VBoxContainer/LblPlayerName
+@onready var turn_time_label: Label = $VBoxContainer/LblTurnTime
+@onready var weapon_name_label: Label = $VBoxContainerWeapon/LblWeaponName
+@onready var winner_label: Label = $VBoxContainerWinner/LblWinner
 @onready var return_timer: Timer = $ReturnTimer
+@onready var win_sound: AudioStreamPlayer2D = $WinnerSound
 
 signal game_over
 
@@ -18,6 +19,7 @@ func update_hud(player_name: String, turn_time: float, weapon: WeaponStrategy):
 	weapon_name_label.text = weapon.get_weapon_description()
 
 func show_winner(player_name: String):
+	win_sound.play()
 	winner_label.show()
 	winner_label.text = "Ganadooor: " + player_name + "!!" 
 	turn_time_label.hide()

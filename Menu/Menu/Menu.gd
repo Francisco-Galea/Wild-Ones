@@ -1,6 +1,6 @@
 extends Control
 
-@onready var player_count_lineedit = $VBoxContainer/HBoxContainer/PlayerCount
+@onready var player_count_lineedit = $VBoxContainer/HBoxContainer/TxtPlayerCount
 
 func start_game(player_count: int):
 	queue_free() 
