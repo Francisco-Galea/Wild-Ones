@@ -11,7 +11,7 @@ func shoot(start_position: Vector2, direction: Vector2) -> Node2D:
 	return tripMine
 
 func get_damage() -> int:
-	return 50
+	return 25
 
 func get_projectile_speed() -> float:
 	return 800 

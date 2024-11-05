@@ -15,6 +15,11 @@ run/main_scene="res://Menu/MainScene/MainScene.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+ConfigManager="*res://AutoLoads/ConfigManager.gd"
+SceneManager="*res://AutoLoads/SceneManager.gd"
+
 [display]
 
 window/stretch/mode="canvas_items"
@@ -26,13 +31,14 @@ project/assembly_name="Wild Ones gd-script"
 [file_customization]
 
 folder_colors={
-"res://Director/": "pink",
+"res://AutoLoads/": "purple",
+"res://Director/": "blue",
 "res://Drops/": "gray",
 "res://HUD/": "teal",
 "res://IdeasFuture/": "orange",
-"res://Menu/": "blue",
+"res://Menu/": "pink",
 "res://Player/": "green",
-"res://Weapons/": "purple",
+"res://Weapons/": "red",
 "res://World/": "yellow"
 }
 

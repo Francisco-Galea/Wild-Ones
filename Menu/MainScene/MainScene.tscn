@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bsf6ck8jcry7b"]
+[gd_scene load_steps=8 format=3 uid="uid://bsf6ck8jcry7b"]
 
 [ext_resource type="Script" path="res://Menu/MainScene/MainScene.gd" id="1_3tru1"]
 [ext_resource type="AudioStream" uid="uid://bd7v2v7ihd2dl" path="res://Menu/Sounds/theme.mp3" id="2_7c4jc"]
@@ -9,6 +9,9 @@ bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsoii"]
 bg_color = Color(0.0605303, 0.0605304, 0.0605303, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p3ll6"]
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pihhh"]
 bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
@@ -77,6 +80,12 @@ theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = SubResource("StyleBoxFlat_fsoii")
 text = "Jugar"
 
+[node name="ButtonConfig" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_p3ll6")
+text = "Configuraciones"
+
 [node name="ButtonExitGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
@@ -84,4 +93,5 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_pihhh")
 text = "Salir"
 
 [connection signal="pressed" from="VBoxContainer/ButtonPlay" to="." method="_on_button_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonConfig" to="." method="_on_button_config_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonExitGame" to="." method="_on_buttonExit_game_pressed"]

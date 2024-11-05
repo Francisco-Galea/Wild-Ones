@@ -15,7 +15,6 @@ func _on_timer_timeout():
 	explode()
 
 func explode():
-	print("Estoy en grenade.gd")
 	explosion_particles.emitting = true
 	explosion_sound.play()
 	var explosion_area = $Area2D

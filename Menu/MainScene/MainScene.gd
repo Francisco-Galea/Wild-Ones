@@ -1,12 +1,12 @@
 extends Control
 
-var menu_scene: PackedScene = preload("res://Menu/Menu/Menu.tscn")
-
-func _on_buttonExit_game_pressed():
+func _on_buttonExit_game_pressed() -> void:
 	get_tree().quit()
 
-func _on_button_play_pressed():
-	var instance = menu_scene.instantiate()
-	get_tree().root.add_child(instance)
-	queue_free()  
+func _on_button_play_pressed() -> void:
+	SceneManager.change_scene("res://Menu/Menu/Menu.tscn")
+	queue_free()
 
+func _on_button_config_pressed() -> void:
+	SceneManager.change_scene("res://Menu/ConfigMenu/ConfigMenu.tscn")
+	queue_free()

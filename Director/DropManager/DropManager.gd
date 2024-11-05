@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var weapon_box_scene: PackedScene = preload("res://Drops/WeaponBox.tscn")
-@export var drop_interval: float = 10.0  
+@export var drop_interval: float = 2 
 var drop_points: Array[Marker2D] = []
 var drop_timer: Timer
 

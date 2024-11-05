@@ -14,6 +14,7 @@ func _on_activation_area_body_entered(body):
 
 func explode():
 	explosion_sound.play()
+	hide()
 	var bodies = explosion_area.get_overlapping_bodies()
 	for body in bodies:
 		if body.has_method("take_damage") and body != self:

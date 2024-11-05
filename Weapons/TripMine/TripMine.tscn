@@ -73,9 +73,9 @@ stream = ExtResource("3_xs5d6")
 
 [node name="ActivationTime" type="Timer" parent="."]
 
-[node name="delay_time" type="Timer" parent="."]
+[node name="DelayTime" type="Timer" parent="."]
 wait_time = 4096.0
 one_shot = true
 
 [connection signal="body_entered" from="ActivationArea" to="." method="_on_activation_area_body_entered"]
-[connection signal="timeout" from="delay_time" to="." method="_on_delay_time_timeout"]
+[connection signal="timeout" from="DelayTime" to="." method="_on_delay_time_timeout"]

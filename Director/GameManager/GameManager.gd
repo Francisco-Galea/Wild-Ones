@@ -25,6 +25,7 @@ func _ready():
 func setup_game_hud():
 	game_hud = game_hud_scene.instantiate()
 	add_child(game_hud)
+	game_hud.connect("game_over", _on_game_over)
 	update_hud()
 
 func setup_drop_manager():
@@ -38,8 +39,6 @@ func setup_turn_manager():
 	turn_manager.connect("turn_started", _on_turn_started)
 	turn_manager.connect("turn_ended", _on_turn_ended)
 	turn_manager.connect("game_ended", _on_game_ended)
-	for player in players:
-		player.set_turn_manager(turn_manager)
 
 func set_player_count(count: int):
 	player_count = count
@@ -49,7 +48,7 @@ func create_players():
 	players.clear()
 	for i in range(player_count):
 		var player_instance = player_scene.instantiate()
-		player_instance.name = "Player" + str(i + 1)  
+		player_instance.name = "Player " + str(i + 1)  
 		player_instance.position = spawn_manager.get_random_spawn_point()
 		player_instance.connect("player_died", _on_player_died) 
 		add_child(player_instance)
@@ -60,23 +59,40 @@ func create_world():
 	add_child(world_instance)
 	spawn_manager = world_instance.get_node("SpawnPoints") as SpawnManager
 
-func _process(delta: float):
+func _process(_delta: float):
 	update_hud()
 
 func update_hud():
+	if not is_instance_valid(turn_manager) or not is_instance_valid(game_hud):
+		return
 	var current_player = turn_manager.get_current_player()
-	game_hud.update_hud(current_player.name, turn_manager.get_turn_time_remaining(), current_player.get_current_weapon())
+	if current_player:
+		game_hud.update_hud(current_player.name, turn_manager.get_turn_time_remaining(), current_player.get_current_weapon())
 
-func _on_turn_started(player_name: String):
-	print("Turn started for " + player_name)
+func _on_turn_started(player: CharacterBody2D):
+	player.start_turn()
 
-func _on_turn_ended():
-	print("Turn ended")
+func _on_turn_ended(player: CharacterBody2D):
+	player.end_turn()
 
-func _on_game_ended(winner_name: String):
-	print("Game ended. Winner: " + winner_name)
+func _on_game_ended(winner: CharacterBody2D):
+	if winner:
+		game_hud.show_winner(winner.name)
+	else:
+		game_hud.show_winner("Ninguno")
 
-func _on_player_died(dead_player):
+func _on_player_died(dead_player: CharacterBody2D):
 	players.erase(dead_player)
-	if turn_manager:
-		turn_manager.player_died(dead_player)
+	turn_manager.player_died(dead_player)
+
+func _on_game_over():
+	for child in get_children():
+		child.queue_free()
+	await get_tree().process_frame
+	var root = get_tree().root
+	for child in root.get_children():
+		if child != self and child.name != "SceneManager" and child.name != "ConfigManager":
+				child.queue_free()
+	await get_tree().process_frame
+	get_tree().change_scene_to_file("res://Menu/MainScene/MainScene.tscn")
+	queue_free()
