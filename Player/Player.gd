@@ -7,8 +7,9 @@ extends CharacterBody2D
 
 var turn_manager: TurnManager
 var player_name: String
-var velocidad: int = 200
+var velocidad: int = 100
 var gravity: float
+var jump_velocity: int = -200
 var is_dead: bool = false
 var has_shot: bool = false
 var current_weapon_index: int = 0
@@ -62,10 +63,11 @@ func _process(delta):
 		handle_movement()
 
 func handle_movement():
-	var input_direction = Input.get_axis("move_left", "move_right")
+	var input_direction = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	velocity.x = input_direction * velocidad
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = -velocidad
+		velocity.y = jump_velocity
+	move_and_slide()
 
 func handle_weapon_switch():
 	current_weapon_index = (current_weapon_index + 1) % weapons.size()
