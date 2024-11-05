@@ -59,7 +59,7 @@ func create_world():
 	add_child(world_instance)
 	spawn_manager = world_instance.get_node("SpawnPoints") as SpawnManager
 
-func _process(delta: float):
+func _process(_delta: float):
 	update_hud()
 
 func update_hud():

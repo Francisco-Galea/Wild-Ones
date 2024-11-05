@@ -58,7 +58,7 @@ func handle_gravity(delta: float):
 	else:
 		velocity.y = 0
 
-func _process(delta):
+func _process(_delta):
 	if is_processing_input():
 		handle_movement()
 
