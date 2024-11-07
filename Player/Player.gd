@@ -27,6 +27,7 @@ func _ready():
 	set_current_weapon(0)
 	player_name_label.text = name
 	player_name = name
+	set_process(false)
 	set_process_input(false)  
 
 func _physics_process(delta):
@@ -43,9 +44,11 @@ func _input(event):
 
 func start_turn():
 	set_process_input(true)  
+	set_process(true)
 
 func end_turn():
 	set_process_input(false)  
+	set_process(false)
 	has_shot = false
 	stop_movement()
 
@@ -59,6 +62,7 @@ func handle_gravity(delta: float):
 		velocity.y = 0
 
 func _process(_delta):
+	print("Me ejecuto ")
 	if is_processing_input():
 		handle_movement()
 
@@ -111,3 +115,7 @@ func has_weapon(weapon_strategy: WeaponStrategy) -> bool:
 		if weapon.get_script() == weapon_strategy.get_script():
 			return true
 	return false
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	_on_died()
