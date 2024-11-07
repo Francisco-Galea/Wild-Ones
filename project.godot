@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Wild Ones gd-script"
+config/name="Wild Ones "
 run/main_scene="res://Menu/MainScene/MainScene.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
